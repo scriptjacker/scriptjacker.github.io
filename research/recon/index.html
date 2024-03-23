@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-png">
+    <title>Recon | ScriptJacker | Reconnaissance</title>
+</head>
+<body oncontextmenu="return false">
+
+<!-- navbar starts -->
+<header>
+    <a href="../../" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../">Home</a></li>
+          <li><a href="../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../owasp">Owasp</a></li>
+                 <li><a href="">Recon</a></li>
+                <li><a href="../bash">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../contact">Contact</a></li>
+            <li><a href="../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+<!-- navbar ends -->
+
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-search"></i> Research On <span>Recon</span></h3>
+          <br>
+          <div class="recon-image">
+            <a href="https://drive.google.com/file/d/1GX4PfdK9z8ydqMWePu1COgR1b3_BJxqj/view?usp=drivesdk" target="_blank">
+              <img src="../../assets/images/recon.png" alt="Recon Methodology"></a>
+        </div> 
+        <br>
+          <p>Hello guys welcome to recon page, Here we will provide you a very deep <span class="colorb">recon methodology</span> 
+            that will surely help you in increasing you attack surface. You can cick on image and download it from 
+            the drive link.
+          </p>
+          <br>
+          <br>
+          <h3 class="header"> Steps For <span>Recon</span></h3>
+          <br>
+          <ol class="list">
+            <li><span class="colora">Host Discovery</span> <i class="fas fa-arrow-right"></i> You must check weather the host is up or down before starting recon. Simple utility
+              for that is ping.
+            </li>
+            <br>
+            <li><span class="colora">Firewall Check</span> <i class="fas fa-arrow-right"></i> You must check firewall like cloudflare, cloudfront to later on try for bypasses related to it. Most popular tool
+              for that is wafw00f.
+            </li>
+            <br>
+            <li><span class="colora">CMS Detection</span> <i class="fas fa-arrow-right"></i> You must check the which CMS (Content Management System) like WordPress, Joomla, etc to 
+              do possible attacks/scans related to it.
+            </li>
+            <br>
+            <li><span class="colora">DNS Recon</span> <i class="fas fa-arrow-right"></i> You should perform DNS Enum/Recon to gather its information, It may discover something. Tools
+              that often help are Dnsrecon, Dnsenum, etc.
+            </li>
+            <br>
+            <li><span class="colora">Basic Info</span> <i class="fas fa-arrow-right"></i> You must gather other basic info like its past screenshot from web.archive.org, its seeds, whois
+              dnsdumpster.com, whatweb, theharvester, maltego, spiderfoot, etc.
+            </li>
+            <br>
+            <li><span class="colora">Google Dorking</span> <i class="fas fa-arrow-right"></i> You have to perform google dorking from both manual and automation. Tools that can help
+              are FGDS, Pagodo, GHDB, etc. 
+             </li>
+            <br>
+            <li><span class="colora">Github Dorking</span> <i class="fas fa-arrow-right"></i> You should perform github recon from both automation and manual 
+              approach so you can get some leaked information. Tools that can be used are gitdorker, gitgrabber, etc.</li>
+            <br>
+            <li><span class="colora">JS Discovery</span> <i class="fas fa-arrow-right"></i> You must check the JS files it can leak some sensitive URL or 
+            credentials. Tools are subJS, getJS, Linkfinder, etc.</li>
+            <br>
+            <li><span class="colora">Shodan Dorking</span> <i class="fas fa-arrow-right"></i> You must check the IP and Domain on shodan it can give us
+            some hidden IP's or secret info related to target and you should try manual approach for this. Tools for helping you shodan-eye, shodan-recon, etc.</li>
+            <br>
+            <li><span class="colora">Subdomain Enum</span> <i class="fas fa-arrow-right"></i> You must grab all the subdomains to increase your attack surface
+            area and your scope, you may find hidden subdomain. Tools like sublist3r, subfinder, assetfinder, amass, etc.</li>
+            <br>
+            <li><span class="colora">Network Scanning</span> <i class="fas fa-arrow-right"></i> You can then perform network scanning on those subdomains or on
+            particular domai to see services running, open ports, etc info. Nmap and masscan are useful tool.</li>
+            <br>
+            <li><span class="colora">Sub Takeover</span> <i class="fas fa-arrow-right"></i> You can then try to takeover 404 subdomain with a CNAME record and if you
+            dir so boom it's a vulnerability. Tools that may help are sybzy, can-i-takeover-xyz, nuclei, etc.</li>
+            <br>
+            <li><span class="colora">Active Subdomains</span> <i class="fas fa-arrow-right"></i> You have to filter active and working subdomains to do your
+            futher attacks. Can use httpx or httprobe tool.</li>
+            <br>
+            <li><span class="colora">Sub Sub Enum</span> <i class="fas fa-arrow-right"></i> You should check for sub sub domain to increase the attack surface and
+            find unknown domains. Useful tool is altdns.</li>
+            <br>
+            <li><span class="colora">Dir Busting</span> <i class="fas fa-arrow-right"></i> You must check for hidden directories, files and pages to get sensitive info.
+             Popular tools are ffuf, gobuster, dirbuster, dirb, etc.</li>
+            <br>
+            <li><span class="colora">Grabing Params</span> <i class="fas fa-arrow-right"></i> You have to grab the paramaters and endpoints to check for injections
+            and other vulnerabilities. Tools like gau, waybackurls, katana, etc.</li>
+            <br>
+            <li><span class="colora">Vulnerable Params</span> <i class="fas fa-arrow-right"></i> You should grep parameters that may vulnerable to specific vulnerability
+            and put them in one file. gf tool will help.</li>
+            <br>
+            <li><span class="colora">Open Buckets</span> <i class="fas fa-arrow-right"></i> You can try to find open buckets sometimes its publically 
+            available. </li>
+            <br>
+            <li><span class="colora">403 Bypass</span> <i class="fas fa-arrow-right"></i> You must try to bypass 403 (forebidden) pages with several techniques 
+            and methods. </li>
+            <br>
+            <li><span class="colora">Vulnerability Scan</span> <i class="fas fa-arrow-right"></i> You can perform vulnerability scanning in background with 
+            the help of nuclei, nikto, rapidscan, etc.</li>
+            <br>
+            <li><span class="colora">Particular Vul Scan</span> <i class="fas fa-arrow-right"></i> You have to run tools for particular vulnerability like 
+            sqlmap for sqli, xsser for xss, tqlmap for ssti, etc. </li>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>help@scriptjacker.in</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:help@scriptjacker.in" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2023 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../assets/js/page.js"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+
+</body>
+</html>

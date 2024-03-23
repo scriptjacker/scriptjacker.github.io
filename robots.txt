@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /cgi-bin/
+Sitemap: https://scriptjacker.in/sitemap.xml
+Sitemap: https://scriptjacker.in/sitemap2.xml

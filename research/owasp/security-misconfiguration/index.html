@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../../assets/images/favicon.ico" type="image/x-png">
+    <title>Security Misconfiguration | ScriptJacker | OWASP</title>
+</head>
+<body oncontextmenu="return false">
+
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    <li><a href="#validation">1. Improper Validation</a></li>
+    <li><a href="#overflow">2. Length Overflow</a></li>
+    <li><a href="#tls">3. Poor Encryption</a></li>
+    <li><a href="#tls1">&#10551; 3.1 Forced HTTPS</a></li>
+    <li><a href="#tls2">&#10551; 3.2 TLS Issues</a></li>
+    <li><a href="#headers">4. HTTP Headers</a></li>
+    <li><a href="#secheader">5. HTTP Security Headers</a></li>
+    <li><a href="#httpmethod">6. HTTP Methods</a></li>
+    <li><a href="#dirlist">7. Directory Listing Enable</a></li>
+    <li><a href="#defaultpage">8. Default Pages Enabled</a></li>
+    <li><a href="#credential">9. Default Credentials</a></li>
+    <li><a href="#bucket">10. Open S3 Bucket</a></li>
+    <li><a href="#version">11. Subdomain Takeover</a></li>
+    <li><a href="#version">12. Session Management</a></li>
+    <li><a href="#find">&#10551; 12.1 Back Button Enabled</a></li>
+    <li><a href="#find">&#10551; 12.2 Password Change</a></li>
+    <li><a href="#find">&#10551; 12.3 Email Change</a></li>
+    <li><a href="#find">&#10551; 12.4 Account logout</a></li>
+    <li><a href="#version">10. Version Disclosure</a></li>
+    <li><a href="#version">11. Weak Password Policy</a></li>
+    <li><a href="#version">12. No Email Verification</a></li>
+    <li><a href="#version">13. Broken Link Hijacking</a></li>
+    <li><a href="#version">14. Rate Limit</a></li>
+    <li><a href="#find">&#10551; 14.1 Forgot Password</a></li>
+    <li><a href="#find">&#10551; 14.2 Login</a></li>
+    <li><a href="#find">&#10551; 14.3 Adding comments</a></li>
+    <li><a href="#version">15. Rate Limit Bypass</a></li>
+    <li><a href="#version">16. Anonymous Login</a></li>
+    <li><a href="#version">17. Origin IP Disclosure</a></li>
+    <li><a href="#version">18. DNS Records</a></li>
+    <li><a href="#find">&#10551; 18.1 SPF Records</a></li>
+    <li><a href="#find">&#10551; 18.1 DMARC Records</a></li>
+    <li><a href="#version">19. Token/Link Expiration</a></li>
+    <li><a href="#version">20. Password Confirmation</a></li>
+    <li><a href="#version">21. Unsafe File Upload</a></li>
+    <li><a href="#version">22. Password Limit</a></li>
+    <li><a href="#version">23. Text Overflow</a></li>
+    <li><a href="#version">24. Intercom Chat Read</a></li>
+    <li><a href="#version">25. Improper Versioning</a></li>
+    <li><a href="#version">26. OAuth Misconfiguration</a></li>
+    <li><a href="#find">&#10551; 26.1 Way 1</a></li>
+    <li><a href="#version">27. CORS Misconfiguration</a></li>
+    <li><a href="#find">&#10551; 27.1 way 1</a></li>
+    <li><a href="#fix">2. Mitigation</a></li>
+    <li><a href="#reference">3. Reference Reports</a></li>
+    <li><a href="#labs">4. Practice Labs</a></li> 
+    <li><a href="#version"></a></li>
+    <li><a href="#version"></a></li>
+    <li><a href="#version"></a></li>
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../../">Home</a></li>
+          <li><a href="../../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../">Owasp</a></li>
+                 <li><a href="../../recon">Recon</a></li>
+                <li><a href="../../bash">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../../contact">Contact</a></li>
+            <li><a href="../../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content">
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-cogs"></i>  Security <span>Misconfigurations</span></h3>
+          <br>
+          <br>
+          <ol class="list">
+            <ul><span class="colord">Security Misconfiguration</span> is a critical security issue that arises when an application, its server, database, or <span class="colord">components</span> are not properly <span class="colord">configured</span>. This can happen at any level of an application stack, including the network services, platform, web server, application server, database, and framework. Misconfigurations can happen due to various reasons, such as lack of standard configurations, unpatched flaws that are vulnerable to <span class="colord">known</span> misconfigurations, insecure <span class="colord">default</span> configurations, and <span class="colord">incomplete</span> configurations. 
+              <br>
+              <br id="validation">
+            The <span class="colord">impact</span> of this type of vulnerability can range from a <span class="colord">minor</span> issue to a <span class="colord">major</span> security breach. For instance, a misconfigured HTTP header can allow an attacker to hijack cookies, expose sensitive information, or cache private data. In a cloud environment, a misconfigured container or virtual machine can expose all data in the cloud. In a database, a misconfiguration can expose all data in the database. <b>In this page we have discussed certain weaknesses and vulnerabilities.</b></ul>
+            <br >
+            <h3 class="headerc">1. <span>Improper Data/Input </span> <span class="colorc">Validation</span></h3>
+            <ul>Almost all the bugs explained below can be done with the help of improper validation and <span class="colord">sanitization of data</span>. So, you can see that it plays an <span class="colord">crucial role</span> in bug hunting. It is a common attack vector for finding vulnerabilities. This issue arises when a web application does not adequately <span class="colord">validate</span> or <span class="colord">sanitize</span> user inputs before processing them. This can lead to a wide range of vulnerabilities, including SQL injection, cross-site scripting (XSS), buffer Overflow, etc.
+              <br>
+              It can arise in a variety of contexts. It can occur in any part of an application that <span class="colord">process user input</span>. This could be a web <span class="colord">form</span>, a <span class="colord">URL</span>, a <span class="colord">cookie</span>, an <span class="colord">HTTP Header</span>, <span class="colord">API</span> endpoints or any other type of input. When a web application is allowing <span class="colord">entering symbols</span>, numbers or string in a places where they are not required or no <span class="colord">max or min</span> length.
+              <br>
+              <br>
+              For example: A user is able to enter text in number field, symbols in name field or leave any field null. It can be reported by itself but it would not pose significant effect so for increasing impact it must be chain like improper validation leads to html injection, etc.
+            </ul>
+            <br>
+            <ul>You Must check these things in input validation. These can be chain and also individually reported.</ul>
+            <ul><span class="colorb">Type Checking</span> <i class="fas fa-arrow-right"></i> This process involves ensuring that the input is of the correct type. For example, if a variable is supposed to be a number, type checking would ensure that the input is indeed a number.</ul>
+            <br>
+            <ul><span class="colorb">Length Checking</span> <i class="fas fa-arrow-right"></i> This process involves ensuring that the input is of the correct length. This can help prevent buffer overflow vulnerabilities, where data is written to a section of memory that should not have been modified.</ul>
+            <br>
+            <ul><span class="colorb">Input Encoding</span> <i class="fas fa-arrow-right"></i> This process involves translating potentially dangerous characters into a protected form. For instance, in HTML, the &lt; and > characters are replaced with their corresponding HTML entities to prevent them from being interpreted as tags. </ul>
+            <br>
+            <ul><span class="colorb">Input Filtering</span> <i class="fas fa-arrow-right"></i> This process involves checking the input against a set of rules and accepting or rejecting it accordingly. For example, a filter could be set up to reject any input that contains special characters or SQL keywords.</ul>
+            <br>
+            <ul><span class="colorb">Input Sanitization</span> <i class="fas fa-arrow-right"></i> This process ensures that the input coming from untrusted users is clean. It is a form of validation, but instead of looking for values that are valid, it looks for values that are invalid. For instance, if an application expects a number, input sanitization would check for any non-numeric characters.</ul>
+            <div class="image">
+              <img draggable="true" class="tilt" src="../../../assets/images/iv1.png" alt="">
+              <img draggable="true" class="tilt" src="../../../assets/images/iv2.png" alt="">
+            </div>
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/G4h4lc910BE?si=q_qkYWRELJ7QihXt" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <br id="overflow">
+            <br>
+            <br>
+            <h3 class="headerc">2. <span>Length </span> <span class="colorc">Overflow</span></h3>
+            <ul>It a part of above weakness i.e <span class="colord">length checking</span>, but it can be also <span class="colord">classified alone</span> as it can leads to Application <span class="colord">DOS</span> attack or <span class="colord">time delay</span>. Length overflow is a type of attack where the attacker sends a request with an extremely <span class="colord">long</span> length payload, causing the server to <span class="colord">crash</span>. It can be text, number, symbols, or mix. This is a type of Denial of Service (DoS) attack.</ul>
+            <ul>Example: If you try to upload long text with symbols in the comment option of blog website and it says that special character not allowed so try to only upload long alphabet or numbers.</ul>
+            <br>
+            <ul>Here below is a long text payload text file that you can use to put in input fields.</ul>
+            <a href="https://drive.google.com/file/d/1bufHtJe2wHVHHAmgtOj1Ru-i1Ip5yIqz/view?usp=sharing" class="btn" target="_blank">
+                  <i class="fas fa-download "></i>
+                  <span> Download</span>
+            </a>
+            <br>
+            <br>
+            <div class="image">
+              <img draggable="true" class="tilt" src="../../../assets/images/overflow1.png" alt="">
+              <img draggable="true" class="tilt" src="../../../assets/images/overflow2.png" alt="">
+            </div>
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/jFaG1Zc1ggs?si=sDgWq2Wq9DB07xDk" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <br id="tls">
+            <br>
+            <br>
+            <h3 class="headerc" >3. <span>Poor </span> <span class="colorc">Encryption Used</span></h3>
+        <ul id="tls1">This term is a broad description that could encompass various weaknesses related to encryption implementations in software, protocols, or systems. Poor encryption practices can lead to serious security risks, as encryption is a fundamental component of securing sensitive data.</ul>
+<br>
+            <h3 class="headerd">1. <span>No Force HTTPS:</span></h3>
+            <ul>Typically it refers to a situation where a website doesn't enforce the use of HTTPS for secure communication between the client (browser) and the server. HTTPS encrypts the data transmitted between the user and the website, providing a secure connection. In simple words it means that if we visit a page and it is opened in HTTP protocol and not HTTPS.</ul>
+            <br>
+            <ul id="tls2"><span class="colorb">Impact</span> <i class="fas fa-arrow-right"></i> If a website doesn't properly force the use of HTTPS, it might be susceptible to various security risks, including man-in-the-middle attacks, where an attacker could intercept or manipulate the data being transmitted.</ul>
+            <br>
+            <h3 class="headerd">2. <span>TLS Cipher Issues</span></h3>
+            <ul>A "weak TLS cipher" would suggest that the encryption algorithms and ciphers used in the TLS handshake and subsequent communication are not strong enough, making the communication vulnerable to attacks. This could include the use of deprecated or insecure cryptographic algorithms.</ul>
+         <br>
+            <ul><span class="colorb">Use of Weak or Deprecated Ciphers</span> <i class="fas fa-arrow-right"></i> Some older or insecure encryption algorithms and ciphers may be used in TLS configurations. For example, ciphers like RC4 or DES (Data Encryption Standard) are considered weak and have known vulnerabilities. It's crucial to avoid the use of deprecated ciphers to ensure a secure connection.</ul>
+         <br>
+         <ul><span class="colorb">Outdated Protocols</span> <i class="fas fa-arrow-right"></i> The use of outdated TLS protocols, such as TLS 1.0 or TLS 1.1, can pose security risks. These protocols may have known vulnerabilities, and modern best practices recommend using the latest versions of TLS (such as TLS 1.2 or TLS 1.3) for improved security.</ul>
+         <br>
+         <ul id="headers">NOTE: If a website is doing these above things that you can try to report them as a weakness.</ul>
+         <br>
+         <br>
+         <h3 class="headerc" >4. <span>HTTP </span> <span class="colorc">Headers Misconf</span></h3>
+         <ul>These misconfigurations might expose sensitive information, enable attacks, or impact the overall security posture of a web application. You can use Burpsuite tool or curl command to intercept requests and responses.</ul>
+         <br>
+         <ul ><span class="colorb">Exposed Server Information</span> <i class="fas fa-arrow-right"></i> HTTP response headers may include information about the server software being used. While this information is often harmless, it can be leveraged by attackers to identify potential vulnerabilities specific to the server software.</ul>
+         <pre class="prettyprint" >
+Server: Apache/2.4.29 (Ubuntu)
+X-Powered-By: PHP/7.4.3</pre>
+         <br id="secheader">
+         <br>
+         <br>
+         <h3 class="headerc" >5. <span>HTTP </span> <span class="colorc">Security Headers</span></h3>
+         <ul>HTTP security headers play a crucial role in enhancing the security of web applications by providing additional instructions to web browsers. Here Nuclei tool, Burpsuite and curl command can help you.</ul>
+         <ul ><span class="colorb">Content Security Policy (CSP)</span> <i class="fas fa-arrow-right"></i> Allowing 'unsafe-inline' for scripts introduces a security risk by allowing inline script execution, potentially exposing the application to Cross-Site Scripting (XSS) attacks.</ul>
+         <pre class="prettyprint" >
+Content-Security-Policy: default-src 'self'; script-src 'unsafe-inline'</pre>
+<ul ><span class="colorb">Strict-Transport-Security (HSTS)</span> <i class="fas fa-arrow-right"></i> Setting max-age to 0 effectively disables HSTS. This misconfiguration may expose users to downgrade attacks, where an attacker can force communication over HTTP.</ul>
+         <pre class="prettyprint" >
+Strict-Transport-Security: max-age=0</pre>
+<ul ><span class="colorb">X-Content-Type-Options</span> <i class="fas fa-arrow-right"></i> A misconfiguration might involve omitting the nosniff directive, allowing browsers to perform MIME sniffing and potentially leading to security risks.</ul>
+         <pre class="prettyprint" >
+X-Content-Type-Options: nosniff</pre>
+<ul ><span class="colorb">X-Frame-Options</span> <i class="fas fa-arrow-right"></i> Using ALLOW-FROM with a specific domain is now deprecated/outdated due to potential security issues. It's recommended to use SAMEORIGIN instead.</ul>
+         <pre class="prettyprint" >
+X-Frame-Options: ALLOW-FROM https://allowed-domain.com</pre>
+<ul ><span class="colorb">Cache-Control</span> <i class="fas fa-arrow-right"></i> Setting public without a proper max-age allows both private and shared caches to store the response indefinitely, potentially exposing sensitive information.</ul>
+         <pre class="prettyprint" >
+Cache-Control: public</pre>
+<ul><span class="colorb"> X-XSS-Protection</span> <i class="fas fa-arrow-right"></i> Setting X-XSS-Protection to 0 disables XSS protection, which may expose the application to cross-site scripting (XSS) attacks.</ul>
+         <pre class="prettyprint" id="httpmethod">
+X-XSS-Protection: 0</pre>
+         <br>
+         <br>
+  <h3 class="headerc" >6. <span>HTTP </span> <span class="colorc">Methods</span></h3>
+  <ul>HTTP methods misconfigurations refer to issues where a web server or application is improperly configured in terms of which HTTP methods (such as GET, POST, PUT, DELETE, PROPPATCH etc.) are allowed or disallowed on specific resources. You can use Burpsuite tool, curl command or inspect element for this.</ul>
+  <ul>Use OPTIONS method in request and you will see in response that which methods are allowed or directly try to put method in request that you want.</ul>       
+  <pre class="prettyprint">
+#Response will be like this
+HTTP/1.1 200 OK
+Allow: GET, POST, OPTIONS, TRACE
+Access-Control-Allow-Methods: GET, POST, OPTIONS, TRACE</pre>
+  <br>
+         <ul><span class="colorb">Allowing Unsafe Methods</span> <i class="fas fa-arrow-right"></i> Servers should restrict the use of potentially unsafe methods like PUT, DELETE, TRACE and others unless explicitly required.
+          Misconfigurations may occur if these methods are allowed without proper validation or authorization checks.</ul>
+         <br>
+         <ul id="dirlist"><span class="colorb">Sensitive Information</span> <i class="fas fa-arrow-right"></i> In some cases, sensitive information get disclosed or directory listing may be enabled when we change the HTTP Method. Example: If we see a page showing 403 in GET Request and if we try to change it to POST so it discloses information. It can also used in vulnerability chaining or to take internal access like we can use TRACE and it may reveal internal IP of 403 page and then we can put that in Host Header and bypass 403.</ul>
+         <br>
+         <br>
+         <h3 class="headerc" >7. <span>Directory Listing </span> <span class="colorc">Enabled</span></h3>
+         <ul><a class="colora" href="../sensitive-data-exposure">Directory Listing Enabled</a> vulnerability occurs when a web server is configured to display the contents of a directory when there is no default index file (like index.html or index.php) present.</ul>
+         <pre class="prettyprint">
+&lt;Directory "/var/www/html/uploads"&gt;
+      Options +Indexes
+&lt;/Directory&gt;</pre>
+         <div class="image">
+          <img draggable="true" class="tilt" src="../../../assets/images/dirlist1.png" alt="">
+          <img draggable="true" class="tilt" src="../../../assets/images/dirlist2.png" alt=""  id="defaultpage">
+        </div>
+        <br>
+        <h3 class="headerc" >8. <span>Default Pages </span> <span class="colorc">Enabled</span></h3>
+        <ul>Sometimes when a website is using some software, CMS or any application. So there some default pages for that like in apache there is apache default page, in drupal their are some default pages like install.php, update.php. config.php which can be by default public and not private. It can be found out my manual crawling, directory busting or vulnerability scanning tools for specific CMS like Wpscan, Drupwn, etc.</ul>
+        <ul><span class="colora" >Note</span> <i class="fas fa-arrow-right"></i>There can be not default pages for just softwares but also default pages for errors also. It can also provide version information, and custom error pages should be used.</ul>
+        <br>
+         <ul><span class="colorb" >Impact</span> <i class="fas fa-arrow-right"></i> It is a weakness and default pages can show information about the version used, which maybe outdated for more information about outdated components visit <a target="_blank" href="../vulnerable-outdated-components/"><span class="colord">this</span></a> page. </ul>
+         <div class="image">
+          <img draggable="true" class="tilt" src="../../../assets/images/apache_page.png" alt="">
+          <img draggable="true" class="tilt" src="../../../assets/images/drupal_page.png" alt=""  id="credential">
+        </div>
+         <br>
+         <h3 class="headerc" >9. <span>Default </span> <span class="colorc">Credentials Used</span></h3>
+         <ul>Default credential usage, also known as default username and password usage, is a critical security misconfiguration that occurs when a system or application is deployed with pre-configured or default credentials that are often well-known and widely documented. This misconfiguration can have severe consequences as it provides attackers with a straightforward way to gain unauthorized access to the system.</ul>
+         <br>
+         <h3 class="headerd">1. <span>How to Find:</span></h3>
+            <ul>First step is to find that which software is used and that can be find in information gathering. Sometimes you see that the website is using Apache web server and you have discovered a web server login page so try to put apache default credentials or you see just weak credentials or default credentials like admin:admin, root:root, etc and those can be find on internet in form of file, text, etc. You can try to manually put them or use tool to automate.</ul>
+<br>
+<ul id="bucket">Tools that can be used is Burpsuite Intruder, Hydra, etc. Here are some list of public default password databases - <a target="_blank" href="https://github.com/ihebski/DefaultCreds-cheat-sheet/blob/main/DefaultCreds-Cheat-Sheet.csv"><span class="colord">DefaultCreds-Cheat-Sheet.csv</span></a>, <a target="_blank" href="https://cirt.net/passwords"><span class="colord">cirt.net</span></a>, <a target="_blank" href="https://github.com/danielmiessler/SecLists/tree/master/Passwords/Default-Credentials"><span class="colord">SecLists-Default-Credentials</span></a>.</ul>
+<br>
+<br>
+<h3 class="headerc" >10. <span>Open S3 </span> <span class="colorc">Buckets</span></h3>            
+<ul>Open S3 bucket bugs refer to the misconfiguration of Amazon S3 buckets that leads to unauthorized access. Amazon S3 is a cloud storage service that allows users to store and retrieve data from anywhere on the web. When an S3 bucket is misconfigured to be publicly accessible. It can be used to expose sensitive data or it can be also used to fully takeover bucket and upload malicious content.</ul>
+<br>
+<ul>To exploit this misconfiguration, Here is list for <a target="_blank" href="https://github.com/mxm0z/awesome-sec-s3"><span class="colord">tools</span></a> to enumerate S3 buckets, or they could use a web browser or command-line of aws i.e <a target="_blank" href="https://github.com/aws/aws-cli"><span class="colord">aws-cli</span></a> to access the data directly.</ul>
+<br>         
+<h3 class="headerd">1. <span>How to find:</span></h3>
+<ul><span class="colorb" >Manual Approach</span> <i class="fas fa-arrow-right"></i> In this we will use directly accessing it via browser in url or via command line aws.</ul>  
+<br>
+<ul><span class="colora" >Step 1 </span> <i class="fas fa-arrow-right"></i> Firstly we need to identify that is website is using S3 Bucket service or not, So that our time get saved or we can directly move to next steps without checking that is that site using buckets or not because sometime website used them but still we maybe could no identify it.</ul>
+<div class="image">
+  <img draggable="true" class="tilt" src="../../../assets/images/s3.png" alt="">
+  <img draggable="true" class="tilt" src="../../../assets/images/s3_2.png" alt="">
+</div>
+<ul>For this we can use wappalyzer extention</ul>
+<br>
+<ul><span class="colora" >Method 1</span> <i class="fas fa-arrow-right"></i> Google Dork to find S3 Buckets</ul>
+<pre class="prettyprint">
+site:s3amazonaws.com site.com
+site:amazonaws.com inurl:s3.amazonaws.com 
+site:s3.amazonaws.com intitle:index.of.bucket</pre>
+<br>
+<ul><span class="colora" >Method 2</span> <i class="fas fa-arrow-right"></i> Using burp Suite</ul>
+<ul>crawl the whole application through the browser proxy and then discover the S3 buckets from the sitemap feature of the burp suite. Look for web address or Special headers that mention S3 Bucket like "s3.amazonaws.com" or "x-am-bucket".</ul>
+<br>
+<ul><span class="colora" >Method 3</span> <i class="fas fa-arrow-right"></i> From application</ul>
+<ul>To find the target application's S3 bucket, right-click on any image available on the application, open it in a new tab, and chrck if the image URL format is someting like this "https://name.s3.amazonaws.com/image1.png" in this case "name" before ".s3" is this bucket name where the images or date is stored.</ul>
+<br>
+<ul><span class="colora" >Method 4</span> <i class="fas fa-arrow-right"></i> Online Websites</ul>
+<ul>These website will help, <a target="_blank" href="https://buckets.grayhatwarfare.com/"><span class="colord">grayhatwarfare</span></a>, <a target="_blank" href="https://osint.sh/buckets"><span class="colord">osint.sh</span></a> 
+  </ul>
+  <br>
+  <br>
+<ul><span class="colorb" >Automatic Approach</span> <i class="fas fa-arrow-right"></i> In this we will use tools for making the process fast.</ul>  
+<br>
+<ul><span class="colora" >Method 1</span> <i class="fas fa-arrow-right"></i> Tools</ul>
+<ul>These website will help, <a target="_blank" href="https://github.com/sa7mon/S3Scanner"><span class="colord">S3Scanner</span></a>, <a target="_blank" href="https://github.com/smiegles/mass3"><span class="colord">Mass3</span></a>,  
+  <a target="_blank" href="https://github.com/nahamsec/lazys3"><span class="colord">Lazy S3</span></a>, <a target="_blank" href="https://github.com/securing/DumpsterDiver"><span class="colord">Dumpster Diver</span></a>,  
+  <a target="_blank" href="https://github.com/gwen001/s3-buckets-finder"><span class="colord">S3 Bucket Finder</span></a>
+<br>
+<br>
+<ul><span class="colora" >Method 2</span> <i class="fas fa-arrow-right"></i> Nuclei Template <a target="_blank" href="https://github.com/projectdiscovery/nuclei-templates/blob/master/technologies/s3-detect.yaml"><span class="colord">s3-detect.yaml</span></a></ul>
+<br>
+<ul><span class="colora" >Method 3</span> <i class="fas fa-arrow-right"></i> Simple command to extract S3 bucket from a list of js URLs from a file. You can modify the regex based on your requirements.</ul>
+<pre class="prettyprint">
+cat js_url.txt | xargs - curl -s {} | grep -OE 'http[s]?://[^"]*.s3.amazonaws.com'
+cat js_url.txt | xargs - curl -s | grep -OE 'http[s]?://[^"]*.s3.amazonaws.com/*'</pre>
+<ul><span class="colora" >Method 4</span> <i class="fas fa-arrow-right"></i> Extract using subfinder and httpx</ul>
+<pre class="prettyprint">
+subfinder -d domain.com -all -silent ❘ httpx -status-code title -tech-detect | grep "Amazon S3"</pre>
+<br>
+<ul>test</ul>
+<pre class="prettyprint">
+test
+</pre>
+  <ul>Like here you can see that wordpress 4.7.0 version that is vulnerable to xss is leaked in comments and jquery 1.10.2 version in disclosed in source code itself.</ul>                                 
+ <div class="image">
+    <img draggable="true" class="tilt" src="../../../assets/images/error.gif" alt="">
+    <img draggable="true" class="tilt" src="../../../assets/images/phpinfo.png" alt="">
+  </div>
+  <ul>Like here you can see apache 2.0.54 version is leaked in the default error page and PHP info is leaked in its default phpinfo() page.
+  </ul> 
+  <br>
+                <ul><span class="colorb">Automatic Approach</span> <i class="fas fa-arrow-right"></i> It can be found through tools like wappalyzer, builtwith, dnsdumpster, whatweb, nmap, burpsuite, wpscan, nuclei, nikto, or any other vulnerability scanners. These tools are used to save time and efforts, but we must use manual approach to cross check, as automatic approach is sometime not helpful.</ul>
+                <div class="image">
+                  <img draggable="true" class="tilt" src="../../../assets/images/wappalyzer.png" alt="">
+                  <img draggable="true" class="tilt" src="../../../assets/images/builtwith.png" alt="">
+                  <img draggable="true" class="tilt" src="../../../assets/images/dnsdumpster.png" alt="">
+                </div>
+                <ul>Like here you can see that versions of technologies, software or libraries, etc are shown in wappalyzer extention and in builtwith and dnsdumpster website. and it can be used to chain with other vulnerabilities.
+                </ul> 
+                <pre class="prettyprint">
+whatweb -v -a 3 https://target.com
+whatweb -a 3 https://target.com
+whatweb -v https://target.com
+</pre>
+    <ul>Master the Art of WhatWeb with These Essential Command!</ul>  
+    <br>
+    <pre class="prettyprint">
+nmap -sV target.com
+nmap -A target.com
+nmap -sV -p 1-65535 target.com
+nmap -sV --script=vulners target.com
+nmap -sV --version-intensity 9 target.com
+nmap -sV --script=banner target.com
+Helpful Page - https://nmap.org/nsedoc/categories/version.html
+</pre>
+      <ul >Unlock the Power of Nmap with These Essential Command Secrets!</ul>  
+      <br>
+      <pre class="prettyprint">
+wpscan --url https://target.com --random-user-agent -e vt,vp,u,dbe
+</pre>
+        <ul >Explore WPScan's Secrets with These Essential Command!</ul>  
+        <br>
+        <pre class="prettyprint">
+nuclei -u target.com -t /path/fingerprinthub-web-fingerprints.yaml
+nuclei -u target.com -t /path/http-server-header.yaml
+nuclei -u target.com
+</pre>
+          <ul >Unearth Hidden Web Vulnerabilities with These Nuclei Commands!</ul>  
+          <br>
+          <pre class="prettyprint">
+nikto -h https://target.com -T 3
+nikto -h https://target.com
+nikto -h https://target.com -C all
+</pre>
+            <ul >Unveil Web Security Secrets: Essential Nikto Commands Inside!</ul>  
+            <br id="exploit">
+            <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> These all commands that are provided is just basic and tip of an iceberg, you need to dive deeper to learn about these tools cause commands creation can be also depend on target.</ul>
+            <br>
+            <br>    
+            <h3 class="headerd">2. <span>Exploit Versions:</span></h3>
+            <ul>After finding the versions from any source, for example you have discovered the PHPMailer 5.2.18 from the comment in http or other source. Now, you can go to searchsploit, exploit-db, metasploit, for search exploits or just simply google it like "PHPMailer 5.2.18 exploits".</ul> 
+            <br>
+            <ul><span class="colorb">Searchsploit Output</span></i></ul>
+            <div class="image">
+              <img draggable="true" class="tilt" src="../../../assets/images/searchsploit.jpeg" alt="">
+          </div>
+          <ul><span class="colorb">Exploit-db Output</span></ul>
+          <div class="image">
+            <img draggable="true" class="tilt" src="../../../assets/images/google1.png" alt="">
+            <img draggable="true" class="tilt" src="../../../assets/images/google2.png" alt="">
+        </div>
+        <ul><span class="colorb">Metasploit Output</span></ul>
+            <div class="image">
+              <img draggable="true" class="tilt" src="../../../assets/images/metasploit.jpeg" alt="">
+          </div>
+          <br>
+          <br>
+          <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> You can see the output from all sources and they can be different also. You need to learn about metasploit, exploit-db and searchsploit before exploiting this.</ul> 
+            <br id="fix">
+            <br>
+            <br>
+            <h3 class="headerd">1. <span>Find Versions:</span></h3>
+            <ul><span class="colorb">Manual Approach</span> <i class="fas fa-arrow-right"></i> It can be found in the source code of the application, error messages, comments in html code, http headers, or maybe in default pages like phpinfo(), server-info, etc. Sometimes the CMS or its plugins versions and libraries version like of javascript can be also leaked.</ul>
+         <pre class="prettyprint">
+HTTP/1.1 200 OK
+Date: Tue, 05 Oct 2023 12:00:00 GMT
+Server: Apache/2.2.32 (Ubuntu)
+Content-Type: text/html; charset=utf-8
+Content-Length: 12345
+Connection: keep-alive</pre>
+          <ul>The "Server" header discloses the use of Apache version 2.2.32 running on Ubuntu and that apache version is vulnerable to DOS attack.</ul>  
+                <br>
+<pre class="prettyprint">
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+&lt;title>My Outdated Website</title>
+  &lt;!-- Using WordPress v4.7.0 - Consider upgrading to the latest version for security. --&gt;
+   &lt;script src="jquery-1.10.2.min.js"></script>
+&lt;/head>
+&lt;body>
+  &lt;!-- Please update this outdated WordPress version to the latest release. --&gt;
+    &lt;div id="content">
+  &lt;!-- Other website content --&gt;
+ &lt;/div>
+&lt;/body>
+&lt;/html>
+</pre>
+  <ul>Like here you can see that wordpress 4.7.0 version that is vulnerable to xss is leaked in comments and jquery 1.10.2 version in disclosed in source code itself.</ul>  
+                                  
+ <div class="image">
+    <img draggable="true" class="tilt" src="../../../assets/images/error.gif" alt="">
+    <img draggable="true" class="tilt" src="../../../assets/images/phpinfo.png" alt="">
+  </div>
+  <ul>Like here you can see apache 2.0.54 version is leaked in the default error page and PHP info is leaked in its default phpinfo() page.
+  </ul> 
+  <br>
+                <ul><span class="colorb">Automatic Approach</span> <i class="fas fa-arrow-right"></i> It can be found through tools like wappalyzer, builtwith, dnsdumpster, whatweb, nmap, burpsuite, wpscan, nuclei, nikto, or any other vulnerability scanners. These tools are used to save time and efforts, but we must use manual approach to cross check, as automatic approach is sometime not helpful.</ul>
+                <div class="image">
+                  <img draggable="true" class="tilt" src="../../../assets/images/wappalyzer.png" alt="">
+                  <img draggable="true" class="tilt" src="../../../assets/images/builtwith.png" alt="">
+                  <img draggable="true" class="tilt" src="../../../assets/images/dnsdumpster.png" alt="">
+                </div>
+                <ul>Like here you can see that versions of technologies, software or libraries, etc are shown in wappalyzer extention and in builtwith and dnsdumpster website. and it can be used to chain with other vulnerabilities.
+                </ul> 
+                <pre class="prettyprint">
+whatweb -v -a 3 https://target.com
+whatweb -a 3 https://target.com
+whatweb -v https://target.com
+</pre>
+    <ul>Master the Art of WhatWeb with These Essential Command!</ul>  
+    <br>
+    <pre class="prettyprint">
+nmap -sV target.com
+nmap -A target.com
+nmap -sV -p 1-65535 target.com
+nmap -sV --script=vulners target.com
+nmap -sV --version-intensity 9 target.com
+nmap -sV --script=banner target.com
+Helpful Page - https://nmap.org/nsedoc/categories/version.html
+</pre>
+      <ul >Unlock the Power of Nmap with These Essential Command Secrets!</ul>  
+      <br>
+      <pre class="prettyprint">
+wpscan --url https://target.com --random-user-agent -e vt,vp,u,dbe
+</pre>
+        <ul >Explore WPScan's Secrets with These Essential Command!</ul>  
+        <br>
+        <pre class="prettyprint">
+nuclei -u target.com -t /path/fingerprinthub-web-fingerprints.yaml
+nuclei -u target.com -t /path/http-server-header.yaml
+nuclei -u target.com
+</pre>
+          <ul >Unearth Hidden Web Vulnerabilities with These Nuclei Commands!</ul>  
+          <br>
+          <pre class="prettyprint">
+nikto -h https://target.com -T 3
+nikto -h https://target.com
+nikto -h https://target.com -C all
+</pre>
+            <ul >Unveil Web Security Secrets: Essential Nikto Commands Inside!</ul>  
+            <br id="exploit">
+            <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> These all commands that are provided is just basic and tip of an iceberg, you need to dive deeper to learn about these tools cause commands creation can be also depend on target.</ul>
+            <br>
+            <br>    
+            <h3 class="headerc">2. <span class="colorc"> Mitigation</span> <span>Practices</span></h3>
+            <br>
+            <ul>Addressing Vulnerable and Outdated Components: Effective Mitigation Techniques</ul>
+              <br>
+            <ol class="list">
+              <li><span class="colora">Regular Updates and Patching</span> <i class="fas fa-arrow-right"></i> Keep all software, libraries, and components up to date by applying security patches and updates. Developers frequently release patches to address vulnerabilities.
+              </li>
+              <br>
+              <li><span class="colora">Dependency Management</span> <i class="fas fa-arrow-right"></i> Implement a robust dependency management process. Use tools like package managers to control and monitor dependencies, ensuring that you're using the latest and secure versions.</li>
+              <br>
+              <li><span class="colora">Vulnerability Databases</span> <i class="fas fa-arrow-right"></i> Subscribe to vulnerability databases like the National Vulnerability Database (NVD) to stay informed about known vulnerabilities in your components.
+              </li>
+              <br>
+              <li><span class="colora">Replace Outdated Components</span> <i class="fas fa-arrow-right"></i>  If a component is no longer supported or has critical vulnerabilities, consider replacing it with a more secure alternative.
+              </li>
+              <br>
+              <li><span class="colora">Code Review and Auditing</span> <i class="fas fa-arrow-right"></i> Regularly review your code and audit your software for outdated or vulnerable components. Ensure that all components meet security standards.</li>
+              <br>
+              <li><span class="colora">Least Privilege Access</span> <i class="fas fa-arrow-right"></i> Restrict access to sensitive components and libraries. Only grant permissions to those who need them, and limit access based on the principle of least privilege.</li>
+              <br>
+              <li><span class="colora">Third-Party Risk Assessment</span> <i class="fas fa-arrow-right"></i> Assess the security posture of third-party components and libraries you use in your software. Ensure they follow secure development practices and put regular updates.</li>
+              </ol>
+          <br id="reference">
+          <br>
+          <br>
+          <h3 class="headerc">3. <span>Reference </span><span class="colorc">Reports</span></h3>
+          <br>
+          <ul><span class="colord">Cross-Site Scripting</span> (XSS) vulnerability in a production application using an outdated version of the jQuery library <span class="colord">(verison 3.3.1 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/1720822"><span class="color">Report 1</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Information Disclosure</span> vulnerability in a production application using an outdated version of the PHP Laravel library <span class="colord">(version 5.7 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/306607/"><span class="color">Report 2</span></a>
+          <br>
+          <br>
+          <ul>Outdated version of Yahoo's Bug Bounty program API (version unknown).</ul>
+          <a target="_blank" href="https://hackerone.com/reports/5221"><span class="color">Report 3</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Cross-Site Request Forgery</span> (CSRF) vulnerability in a production application using an outdated version of the Spring Boot library <span class="colord">(version 2.0.4 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/184877"><span class="color">Report 4</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Remote Code Execution</span> (RCE) vulnerability in the Apache Struts2 library <span class="colord">(version 2.5.25 or earlier)</span>.</ul>
+          <a target="_blank" href="https://vuln.ryotak.me/advisories/51"><span class="color">Report 5</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Arbitary file upload</span> vulnerability in a production application using an outdated version of the Apache Commons FileUpload library <span class="colord">(version 1.4 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/1442644"><span class="color">Report 6</span></a>
+        <br id="labs">
+        <br>
+        <br>
+        <h3 class="headerc">4. <span>Solve </span><span class="colorc">Labs/Machines</span></h3>
+        <br>
+          <ul><span class="colord">Metasploitable 2</span> is a virtual environment that contains intentionally <span class="colord">vulnerable and outdated versions</span>, making it an ideal platform for practicing and <span class="colord">improving skills</span> in identifying and <span class="colord">mitigating</span> security weaknesses.</ul>
+          <a target="_blank" href="https://www.vulnhub.com/entry/metasploitable-2,29/"><span class="color">Lab 1</span></a>
+          
+            <br>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>help@scriptjacker.in</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:help@scriptjacker.in" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2023 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>

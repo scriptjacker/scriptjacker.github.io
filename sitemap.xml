@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://scriptjacker.in/</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://scriptjacker.in/index.html</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://scriptjacker.in/contact</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://scriptjacker.in/about</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://scriptjacker.in/research/owasp</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://scriptjacker.in/research/recon</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url><url>
+	<loc>https://scriptjacker.in/research/bash</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://scriptjacker.in/projects</loc>
+	<lastmod>2023-06-26T09:47:21+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+</urlset>
+

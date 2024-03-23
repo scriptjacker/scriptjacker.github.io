@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../../assets/images/favicon.ico" type="image/x-png">
+    <title>Vulnerable and Outdated Components | ScriptJacker | OWASP</title>
+</head>
+<body oncontextmenu="return false">
+
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    
+    <li><a href="#version">1. Version of technology used</a></li>
+    <li><a href="#find">&#10551; 1.1 Find versions</a></li>
+    <li><a href="#exploit">&#10551; 1.2 Exploits versions</a></li>
+    <li><a href="#fix">2. Mitigation</a></li>
+    <li><a href="#reference">3. Reference Reports</a></li>
+    <li><a href="#labs">4. Practice Labs</a></li> 
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../../">Home</a></li>
+          <li><a href="../../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../">Owasp</a></li>
+                 <li><a href="../../recon">Recon</a></li>
+                <li><a href="../../bash">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../../contact">Contact</a></li>
+            <li><a href="../../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content">
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-exclamation-circle"></i> Vulnerable and <span>Outdated Components</span></h3>
+          <br>
+          <br>
+          <ol class="list">
+            <ul>Vulnerable components refer to  <span class="colord">software</span> or  <span class="colord">libraries</span> within a system that have  <span class="colord">known security flaws</span> or weaknesses, which can potentially be exploited by attackers to <span class="colord">compromise</span> the system's <span class="colord">security</span>. Vulnerabilities can exist in any type of software, from web applications to operating systems and <span class="colord">third-party libraries.</span>.
+              <br>
+              <br id="version">
+              <span class="colord">Outdated components</span> are software components that are <span class="colord">no longer maintained</span> or updated with <span class="colord">security patches</span> by their developers. When components become outdated, they can pose a security risk because any new vulnerabilities discovered are <span class="colord">not patched</span>, leaving the system exposed to potential attacks.</ul>
+            <br >
+            <h3 class="headerc">1. <span>Check</span> <span class="colorc">Version of technology</span></h3>
+            <ul>The versions of technologies used in a website can refer to various components of the <span class="colord">web stack</span>, including the <span class="colord">web server</span>, <span class="colord">programming languages</span>, <span class="colord">databases</span>, and frameworks. The <span class="colord">specific versions</span> of these technologies can have significant implications for the website's security, performance, and compatibility.
+              <br>
+              Using <span class="colord">outdated versions</span> of technologies in a website can be <span class="colord">dangerous</span> because it exposes the site to <span class="colord">known security vulnerabilities</span>, leading to potential data breaches, performance issues, and compatibility problems. This can result in <span class="colord">compromised security</span>, a poor user experience, and increased maintenance challenges. Staying <span class="colord">up-to-date</span> with technology versions is crucial for maintaining a secure and functional website.
+              <br id="find">
+              The updates comes for the technology or software because there are some flaws or vulnerabilities in the <span class="colord">older/previous versions</span> and if then also companies are using older version then they can be <span class="colord">vulnerable</span> to attacks. 
+            </ul>
+            <br>
+            <h3 class="headerd">1. <span>Find Versions:</span></h3>
+            <ul><span class="colorb">Manual Approach</span> <i class="fas fa-arrow-right"></i> It can be found in the source code of the application, error messages, comments in html code, http headers, or maybe in default pages like phpinfo(), server-info, etc. Sometimes the CMS or its plugins versions and libraries version like of javascript can be also leaked.</ul>
+         <pre class="prettyprint">
+HTTP/1.1 200 OK
+Date: Tue, 05 Oct 2023 12:00:00 GMT
+Server: Apache/2.2.32 (Ubuntu)
+Content-Type: text/html; charset=utf-8
+Content-Length: 12345
+Connection: keep-alive</pre>
+          <ul>The "Server" header discloses the use of Apache version 2.2.32 running on Ubuntu and that apache version is vulnerable to DOS attack.</ul>  
+                <br>
+<pre class="prettyprint">
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+&lt;title>My Outdated Website</title>
+  &lt;!-- Using WordPress v4.7.0 - Consider upgrading to the latest version for security. --&gt;
+   &lt;script src="jquery-1.10.2.min.js"></script>
+&lt;/head>
+&lt;body>
+  &lt;!-- Please update this outdated WordPress version to the latest release. --&gt;
+    &lt;div id="content">
+  &lt;!-- Other website content --&gt;
+ &lt;/div>
+&lt;/body>
+&lt;/html>
+</pre>
+  <ul>Like here you can see that wordpress 4.7.0 version that is vulnerable to xss is leaked in comments and jquery 1.10.2 version in disclosed in source code itself.</ul>  
+                                  
+ <div class="image">
+    <img draggable="false" class="tilt" src="../../../assets/images/error.gif" alt="">
+    <img draggable="false" class="tilt" src="../../../assets/images/phpinfo.png" alt="">
+  </div>
+  <ul>Like here you can see apache 2.0.54 version is leaked in the default error page and PHP info is leaked in its default phpinfo() page.
+  </ul> 
+  <br>
+                <ul><span class="colorb">Automatic Approach</span> <i class="fas fa-arrow-right"></i> It can be found through tools like wappalyzer, builtwith, dnsdumpster, whatweb, nmap, burpsuite, wpscan, nuclei, nikto, or any other vulnerability scanners. These tools are used to save time and efforts, but we must use manual approach to cross check, as automatic approach is sometime not helpful.</ul>
+                <div class="image">
+                  <img draggable="false" class="tilt" src="../../../assets/images/wappalyzer.png" alt="">
+                  <img draggable="false" class="tilt" src="../../../assets/images/builtwith.png" alt="">
+                  <img draggable="false" class="tilt" src="../../../assets/images/dnsdumpster.png" alt="">
+                </div>
+                <ul>Like here you can see that versions of technologies, software or libraries, etc are shown in wappalyzer extention and in builtwith and dnsdumpster website. and it can be used to chain with other vulnerabilities.
+                </ul> 
+                <pre class="prettyprint">
+whatweb -v -a 3 https://target.com
+whatweb -a 3 https://target.com
+whatweb -v https://target.com
+</pre>
+    <ul>Master the Art of WhatWeb with These Essential Command!</ul>  
+    <br>
+    <pre class="prettyprint">
+nmap -sV target.com
+nmap -A target.com
+nmap -sV -p 1-65535 target.com
+nmap -sV --script=vulners target.com
+nmap -sV --version-intensity 9 target.com
+nmap -sV --script=banner target.com
+Helpful Page - https://nmap.org/nsedoc/categories/version.html
+</pre>
+      <ul >Unlock the Power of Nmap with These Essential Command Secrets!</ul>  
+      <br>
+      <pre class="prettyprint">
+wpscan --url https://target.com --random-user-agent -e vt,vp,u,dbe
+</pre>
+        <ul >Explore WPScan's Secrets with These Essential Command!</ul>  
+        <br>
+        <pre class="prettyprint">
+nuclei -u target.com -t /path/fingerprinthub-web-fingerprints.yaml
+nuclei -u target.com -t /path/http-server-header.yaml
+nuclei -u target.com
+</pre>
+          <ul >Unearth Hidden Web Vulnerabilities with These Nuclei Commands!</ul>  
+          <br>
+          <pre class="prettyprint">
+nikto -h https://target.com -T 3
+nikto -h https://target.com
+nikto -h https://target.com -C all
+</pre>
+            <ul >Unveil Web Security Secrets: Essential Nikto Commands Inside!</ul>  
+            <br id="exploit">
+            <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> These all commands that are provided is just basic and tip of an iceberg, you need to dive deeper to learn about these tools cause commands creation can be also depend on target.</ul>
+            <br>
+            <br>    
+            <h3 class="headerd">2. <span>Exploit Versions:</span></h3>
+            <ul>After finding the versions from any source, for example you have discovered the PHPMailer 5.2.18 from the comment in http or other source. Now, you can go to searchsploit, exploit-db, metasploit, for search exploits or just simply google it like "PHPMailer 5.2.18 exploits".</ul> 
+            <br>
+            <ul><span class="colorb">Searchsploit Output</span></i></ul>
+            <div class="image">
+              <img draggable="false" class="tilt" src="../../../assets/images/searchsploit.jpeg" alt="">
+          </div>
+          <ul><span class="colorb">Exploit-db Output</span></ul>
+          <div class="image">
+            <img draggable="false" class="tilt" src="../../../assets/images/google1.png" alt="">
+            <img draggable="false" class="tilt" src="../../../assets/images/google2.png" alt="">
+        </div>
+        <ul><span class="colorb">Metasploit Output</span></ul>
+            <div class="image">
+              <img draggable="false" class="tilt" src="../../../assets/images/metasploit.jpeg" alt="">
+          </div>
+          <br>
+          <br>
+          <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> You can see the output from all sources and they can be different also. You need to learn about metasploit, exploit-db and searchsploit before exploiting this.</ul> 
+            <br id="fix">
+            <br>
+            <br>
+            <h3 class="headerc">2. <span class="colorc"> Mitigation</span> <span>Practices</span></h3>
+            <br>
+            <ul>Addressing Vulnerable and Outdated Components: Effective Mitigation Techniques</ul>
+              <br>
+            <ol class="list">
+              <li><span class="colora">Regular Updates and Patching</span> <i class="fas fa-arrow-right"></i> Keep all software, libraries, and components up to date by applying security patches and updates. Developers frequently release patches to address vulnerabilities.
+              </li>
+              <br>
+              <li><span class="colora">Dependency Management</span> <i class="fas fa-arrow-right"></i> Implement a robust dependency management process. Use tools like package managers to control and monitor dependencies, ensuring that you're using the latest and secure versions.</li>
+              <br>
+              <li><span class="colora">Vulnerability Databases</span> <i class="fas fa-arrow-right"></i> Subscribe to vulnerability databases like the National Vulnerability Database (NVD) to stay informed about known vulnerabilities in your components.
+              </li>
+              <br>
+              <li><span class="colora">Replace Outdated Components</span> <i class="fas fa-arrow-right"></i>  If a component is no longer supported or has critical vulnerabilities, consider replacing it with a more secure alternative.
+              </li>
+              <br>
+              <li><span class="colora">Code Review and Auditing</span> <i class="fas fa-arrow-right"></i> Regularly review your code and audit your software for outdated or vulnerable components. Ensure that all components meet security standards.</li>
+              <br>
+              <li><span class="colora">Least Privilege Access</span> <i class="fas fa-arrow-right"></i> Restrict access to sensitive components and libraries. Only grant permissions to those who need them, and limit access based on the principle of least privilege.</li>
+              <br>
+              <li><span class="colora">Third-Party Risk Assessment</span> <i class="fas fa-arrow-right"></i> Assess the security posture of third-party components and libraries you use in your software. Ensure they follow secure development practices and put regular updates.</li>
+              </ol>
+          <br id="reference">
+          <br>
+          <br>
+          <h3 class="headerc">3. <span>Reference </span><span class="colorc">Reports</span></h3>
+          <br>
+          <ul><span class="colord">Cross-Site Scripting</span> (XSS) vulnerability in a production application using an outdated version of the jQuery library <span class="colord">(verison 3.3.1 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/1720822"><span class="color">Report 1</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Information Disclosure</span> vulnerability in a production application using an outdated version of the PHP Laravel library <span class="colord">(version 5.7 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/306607/"><span class="color">Report 2</span></a>
+          <br>
+          <br>
+          <ul>Outdated version of Yahoo's Bug Bounty program API (version unknown).</ul>
+          <a target="_blank" href="https://hackerone.com/reports/5221"><span class="color">Report 3</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Cross-Site Request Forgery</span> (CSRF) vulnerability in a production application using an outdated version of the Spring Boot library <span class="colord">(version 2.0.4 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/184877"><span class="color">Report 4</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Remote Code Execution</span> (RCE) vulnerability in the Apache Struts2 library <span class="colord">(version 2.5.25 or earlier)</span>.</ul>
+          <a target="_blank" href="https://vuln.ryotak.me/advisories/51"><span class="color">Report 5</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Arbitary file upload</span> vulnerability in a production application using an outdated version of the Apache Commons FileUpload library <span class="colord">(version 1.4 or earlier)</span>.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/1442644"><span class="color">Report 6</span></a>
+        <br id="labs">
+        <br>
+        <br>
+        <h3 class="headerc">4. <span>Solve </span><span class="colorc">Labs/Machines</span></h3>
+        <br>
+          <ul><span class="colord">Metasploitable 2</span> is a virtual environment that contains intentionally <span class="colord">vulnerable and outdated versions</span>, making it an ideal platform for practicing and <span class="colord">improving skills</span> in identifying and <span class="colord">mitigating</span> security weaknesses.</ul>
+          <a target="_blank" href="https://www.vulnhub.com/entry/metasploitable-2,29/"><span class="color">Lab 1</span></a>
+          
+            <br>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>help@scriptjacker.in</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:help@scriptjacker.in" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2023 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>

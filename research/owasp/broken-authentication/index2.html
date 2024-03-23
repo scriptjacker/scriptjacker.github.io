@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-png">
+    <title>About | ScriptJacker | Parth Narula</title>
+</head>
+<body oncontextmenu="return false">
+
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    
+    <li><a href="#robots.txt">1. Check robots.txt</a></li>
+    <li><a href="#robots.txt">2. View Source Code, Javascript Files And Comments.</a></li>
+    <li><a href="#robots.txt">About us</a></li>
+    <li><a href="#robots.txt">About us</a></li>
+    <li><a href="#robots.txt">About us</a></li>
+    <li><a href="#robots.txt">About us</a></li>
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../../">Home</a></li>
+          <li><a href="../../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../">Owasp</a></li>
+                 <li><a href="../../recon">Recon</a></li>
+                <li><a href="../../bash">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../../contact">Contact</a></li>
+            <li><a href="../../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content">
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-key"></i> Broken <span>Access Control</span></h3>
+          <br>
+        <br>
+          <br>
+          <br>
+          <ol class="list">
+            <h3 class="headerc" id="robots.txt">1. <span>Check</span> <span class="colorc">robots.txt</span></h3>
+            <br>
+            <ul>Robots.txt is a text file placed on a website that provides instructions to web crawlers and search 
+              engine bots about which parts of the site should not be <span class="colord">crawled</span> or <span class="colord">indexed</span>. While robots.txt is primarily 
+              used for legitimate purposes, it can also be helpful for attackers seeking to identify potential 
+              vulnerabilities, such as those related to broken access control. </ul>
+            <br>
+            <h3 class="headerd">1. <span>Legitimate Use:</span></h3>
+              <ul>Content Control: Website owners use robots.txt to control which parts of their website should be 
+                indexed by search engines. For example, they might want to exclude <span class="colord">sensitive information</span> like user 
+                profiles or <span class="colord">admin</span> sections from search engine results to protect user privacy or prevent sensitive 
+                data exposure.</ul>
+         <pre class="prettyprint">User-agent: *
+Disallow: /user/
+Disallow: /admin/</pre>
+          <ul>In this case, the website owner wants to prevent search engines from indexing pages under the <span class="colord">/user/</span> and 
+            <span class="colord">/admin/</span> directories to protect sensitive <span class="colord">user</span> and <span class="colord">administrative data</span>.</ul>  
+                <br>
+                <h3 class="headerd">2. <span>Malicious Use:</span></h3>
+            <ul><span class="colorb">Information Gathering</span> <i class="fas fa-arrow-right"></i> Attackers can examine the 
+              robots.txt file to gain insights into the website's structure and <span class="colord">discover hidden</span> or <span class="colord">restricted areas</span> that 
+              might be vulnerable to broken access control attacks. By identifying directories or files explicitly 
+              excluded in robots.txt, attackers can target these areas for further exploitation.
+            </ul> 
+            <br>
+            <ul><span class="colorb">Enumeration</span> <i class="fas fa-arrow-right"></i>If the robots.txt file 
+              specifies that certain directories or files are off-limits, attackers may attempt to access those resources 
+              directly, looking for misconfigurations or <span class="colord">access control</span> issues that could lead to <span class="colord">unauthorized access</span>.
+            </ul>
+            <pre class="prettyprint">User-agent: *
+Disallow: /admin/
+Disallow: /user/
+Disallow: /private/
+              </pre>
+              <ul>Now, the attacker knows that the <span class="colord">/admin/</span> and <span class="colord">/user/</span> directories are off-limits according to the 
+                robots.txt file. The attacker then attempts to access URLs like <span class="colord">https://example.com/admin/</span> and 
+                <span class="colord">https://example.com/user/</span> directly. If the website has poor access controls or misconfigurations, the 
+                attacker might successfully bypass security measures and gain unauthorized access to sensitive areas.</ul>
+            <div class="image">
+              <img draggable="false" class="tilt" src="../../../assets/images/robots.png" alt="">
+              <img draggable="false" class="tilt" src="../../../assets/images/robots2.jpg" alt="">
+          </div> 
+            <br>
+            <br>
+            <br>
+            <h3 class="headerc">1. <span>view</span> <span class="colorc"> source code, javascript files and comments.</span></h3>
+            <br>
+            <ul>Robots.txt is a text file placed on a website that provides instructions to web crawlers and search 
+              engine bots about which parts of the site should not be <span class="colord">crawled</span> or <span class="colord">indexed</span>. While robots.txt is primarily 
+              used for legitimate purposes, it can also be helpful for attackers seeking to identify potential 
+              vulnerabilities, such as those related to broken access control. </ul>
+            <br>
+            <h3 class="headerd">1. <span>Legitimate Use:</span></h3>
+              <ul>Content Control: Website owners use robots.txt to control which parts of their website should be 
+                indexed by search engines. For example, they might want to exclude <span class="colord">sensitive information</span> like user 
+                profiles or <span class="colord">admin</span> sections from search engine results to protect user privacy or prevent sensitive 
+                data exposure.</ul>
+         <pre class="prettyprint">User-agent: *
+Disallow: /user/
+Disallow: /admin/</pre>
+          <ul>In this case, the website owner wants to prevent search engines from indexing pages under the <span class="colord">/user/</span> and 
+            <span class="colord">/admin/</span> directories to protect sensitive <span class="colord">user</span> and <span class="colord">administrative data</span>.</ul>  
+                <br>
+                <h3 class="headerd">2. <span>Malicious Use:</span></h3>
+            <ul><span class="colorb">Information Gathering</span> <i class="fas fa-arrow-right"></i> Attackers can examine the 
+              robots.txt file to gain insights into the website's structure and <span class="colord">discover hidden</span> or <span class="colord">restricted areas</span> that 
+              might be vulnerable to broken access control attacks. By identifying directories or files explicitly 
+              excluded in robots.txt, attackers can target these areas for further exploitation.
+            </ul> 
+            <br>
+            <ul><span class="colorb">Enumeration</span> <i class="fas fa-arrow-right"></i>If the robots.txt file 
+              specifies that certain directories or files are off-limits, attackers may attempt to access those resources 
+              directly, looking for misconfigurations or <span class="colord">access control</span> issues that could lead to <span class="colord">unauthorized access</span>.
+            </ul>
+            <pre class="prettyprint">User-agent: *
+Disallow: /admin/
+Disallow: /user/
+Disallow: /private/
+              </pre>
+              <ul>Now, the attacker knows that the <span class="colord">/admin/</span> and <span class="colord">/user/</span> directories are off-limits according to the 
+                robots.txt file. The attacker then attempts to access URLs like <span class="colord">https://example.com/admin/</span> and 
+                <span class="colord">https://example.com/user/</span> directly. If the website has poor access controls or misconfigurations, the 
+                attacker might successfully bypass security measures and gain unauthorized access to sensitive areas.</ul>
+            <div class="image">
+              <img draggable="false" class="tilt" src="../../../assets/images/robots.png" alt="">
+              <img draggable="false" class="tilt" src="../../../assets/images/robots2.jpg" alt="">
+          </div> 
+            <br>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>help@scriptjacker.in</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:help@scriptjacker.in" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2023 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+
+</body>
+</html>
