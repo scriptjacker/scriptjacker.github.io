@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .year-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        /* Media query for small screens */
+        @media screen and (max-width: 600px) {
+            .year-box {
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="year-box adjust-year">
+    <div>
+        <h3>Category</h3>
+    </div>
+    <div>
+        <input type="checkbox" name="category" id="latestBlogs" onclick="showContent('latestBlogs')"> Latest Blogs
+    </div>
+    <div>
+        <input type="checkbox" name="category" id="networking" onclick="showContent('networking')"> Networking
+    </div>
+
+    <!-- Content for Latest Blogs -->
+    <div class="content" id="latestBlogsContent">
+        <!-- Insert content for Latest Blogs here -->
+        <p>This is the content for Latest Blogs.</p>
+    </div>
+
+    <!-- Content for Networking -->
+    <div class="content" id="networkingContent">
+        <!-- Insert content for Networking here -->
+        <p>This is the content for Networking.</p>
+    </div>
+</div>
+
+<script>
+    function showContent(category) {
+        // Hide all content
+        var allContent = document.querySelectorAll('.content');
+        allContent.forEach(function (content) {
+            content.classList.remove('active');
+        });
+
+        // Show the selected category content
+        var selectedContent = document.getElementById(category + 'Content');
+        selectedContent.classList.add('active');
+
+        // Scroll to the selected content
+        selectedContent.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
