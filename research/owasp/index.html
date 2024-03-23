@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-png">
+    <title>owasp | ScriptJacker | bug hunting | web pen testing</title>
+</head>
+<body oncontextmenu="return false">
+
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    
+    <li><a href="#bac">1. Broken Access Control</a></li>
+    <li><a href="#sm">2. Security Misconfiguration</a></li>
+    <li><a href="#ba">3. Broken Authentication</a></li>
+    <li><a href="#sde">4. Sensitive Data Exposure</a></li>
+    <li><a href="#vul">5. Vulnerable & Outdated Components</a></li>
+    <li><a href="#sqli">6. SQL Injections</a></li>
+    <li><a href="#xss">7. Cross Site Scripting</a></li>
+    <li><a href="#htmli">8. HTML Injection</a></li>
+    <li><a href="#ci">9. Command Injection</a></li>
+    <li><a href="#coi">10. Code Injection</a></li>
+    <li><a href="#lfi">11. Local File Inclusion</a></li>
+    <li><a href="#rfi">12. Remote File Inclusion</a></li>
+    <li><a href="#ssti">13. Server Side Template Injection</a></li>
+    <li><a href="#hhi">14. Host Header Injection</a></li>
+    <li><a href="#ssrf">15. Server Side Request Forgery</a></li>
+    <li><a href="#blf">16. Business Logic Flaws</a></li>
+    <li><a href="#crlfi">17. CRLF Injection</a></li>
+    <li><a href="#emaili">18. Email Injection</a></li>
+    <li><a href="#fuv">19. File Upload Vulnerabilities</a></li>
+    <li><a href="#csrf">20. Cross Side Request Forgery</a></li>
+    <li><a href="#or">21. Open Redirect</a></li>
+    <li><a href="#jwt">22. JSON Web Token Flaws</a></li>
+    <li><a href="#cb">23. Captcha Bypass</a></li>
+    <li><a href="#mfa">24. Multi Factor Authentication Bypass</a></li>
+
+    
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../">Home</a></li>
+          <li><a href="../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="">Owasp</a></li>
+                 <li><a href="../recon">Recon</a></li>
+                <li><a href="../bash">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../contact">Contact</a></li>
+            <li><a href="../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content" >
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-search"></i> Research On <span>OWASP</span></h3>
+          <br>
+          <div class="owasp-image">
+              <img src="../../assets/images/owasp.jpg" alt="Recon Methodology">
+        </div> 
+        <br>
+          <pre class="prettyprint">In this page we have done research on 'OWASP vulnerabilities' and bring tips and tricks in which most of the cases are covered and list will be get updated on regular basis. If you wanted to 'contribute' and want to add something into tips that we have not added or missed so you can visit the 'contact page' and submit your messege or reach to our email or contact number. We will update the list with your 'name as author'. Some vulnerabilities or tricks can be repeated it can come in many categories. You guys can also provide your research work and we will mention that in our website with your name as author. </pre>
+          <br id="bac">
+          <br>
+          <br>
+          <ol class="list">
+            <h3 class="headera"> Broken <span>Access Control</span></h3>
+            <br>
+            <ul>Broken access control refers to a critical security vulnerability where a system fails to enforce proper 
+              restrictions on user actions and access permissions. This flaw allows malicious or unauthorized users to 
+              gain unauthorized access to resources, data, or functionalities that they should not have. Broken access 
+              control encompasses issues like horizontal privilege escalation, vertical privilege escalation, Insecure 
+              Direct Object References (IDOR), insufficient session management, missing function-level access control, 
+              forced browsing, and overly permissive defaults. When access controls are not correctly implemented, then 
+              unauthorized users are able to bypass intended restrictions and gain access to sensitive information or 
+              perform actions beyond what’s permitted., emphasizing the need for robust access control mechanisms and 
+              careful security implementation to protect against these threats.</ul>
+              <a href="./bac" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="sm">
+            <br>
+            <br>
+            <h3 class="headera"> Security <span>Misconfiguration</span></h3>
+            <br>
+            <ul>Security misconfigurations encompass a broad category of cybersecurity vulnerabilities that arise from 
+              improperly configured systems, applications, or networks. These misconfigurations can manifest in various 
+              domains, including web applications, databases, cloud services, servers, and network infrastructure. 
+              Examples range from failing to disable directory listing on a web server to leaving default database 
+              credentials unchanged or exposing cloud storage without proper access controls. Consequences are severe 
+              and can lead to data breaches, unauthorized access, data manipulation, or service disruptions. Mitigation 
+              strategies involve regular configuration audits, the principle of least privilege, automated checks, timely
+               software updates, and comprehensive personnel training to ensure a robust defense against these pervasive 
+               threats.</ul>
+            <a href="./security-misconfiguration/" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="ba">
+            <br>
+            <br>
+            <h3 class="headera"> Broken <span>Authentication</span></h3>
+            <br>
+            <ul>Broken authentication constitutes a critical category of security vulnerabilities arising from inadequate
+               protection of user identities and credentials within systems, applications, or networks. Weak password 
+               policies, insufficient session management, credential exposure, and the absence of multi-factor authentication
+                (MFA) serve as common causes. Examples include default credentials, session fixation, brute force attacks, 
+                and password reset vulnerabilities, all leading to unauthorized access and potential data breaches. 
+                Consequences encompass unauthorized entry, data leaks, identity theft, and reputation damage. Effective 
+                mitigation strategies involve enforcing strong password policies, implementing MFA, securing session management,
+                 encrypting credentials, implementing rate limiting and account lockouts, and conducting regular security audits
+                  to identify and rectify authentication weaknesses, ensuring robust protection of user data and accounts.</ul>
+            <a href="./broken-authentication/" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="sde">
+            <br>
+            <br>
+            <h3 class="headera"> Sensitive Data <span>Exposure</span></h3>
+            <br>
+            <ul>Sensitive data exposure occurs due to inadequate encryption, weak access controls, insecure storage, 
+              improper data handling, information disclosure, and insufficient data masking. Examples include unencrypted payment data, 
+              misconfigured APIs, unprotected cloud storage, and plaintext passwords. Consequences encompass data 
+              breaches, privacy violations, identity theft, financial losses, and reputation damage. Cryptographic 
+              failures include weak encryption algorithms, improper key management, inadequate randomness, unprotected 
+              key storage, and the absence of forward secrecy. Their impacts include data compromise and financial and 
+              legal ramifications. Mitigation strategies involve strong encryption, rigorous access controls, secure 
+              storage, data masking, proper key management, and regular security audits to safeguard sensitive data, 
+              ensuring confidentiality and integrity.</ul>
+            <a href="./sensitive-data-exposure/" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="vul">
+            <br>
+            <br>
+            <h3 class="headera"> Vulnerable & Outdated <span>Components</span></h3>
+            <br>
+            <ul>Vulnerable and outdated components pose significant security risks, often stemming from outdated or 
+              obsolete software elements due to reasons like a lack of patch management, third-party dependencies, 
+              legacy code, and poor dependency tracking. These components, including operating systems, frameworks, 
+              libraries, and plugins, can introduce exploitable vulnerabilities, leading to potential data breaches, 
+              malware attacks, financial losses, and reputation damage. Effective mitigation strategies involve 
+              proactive patching, vigilant dependency management, continuous monitoring, risk assessment, proactive 
+              upgrade planning, secure coding practices, and rigorous security testing, all crucial to address 
+              vulnerabilities arising from outdated software components and enhance overall system security.</ul>
+            <a href="./vulnerable-outdated-components/" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="sqli">
+            <br>
+            <br>
+            <h3 class="headera"> SQL <span>Injections</span></h3>
+            <br>
+            <ul>SQL Injection (SQLi) is a malicious technique where attackers manipulate input fields of an application 
+              to inject malicious SQL code into the underlying database. This unauthorized SQL code can trick the 
+              application into executing unintended database queries, potentially exposing sensitive data, altering 
+              database contents, or even granting unauthorized access. SQL Injection attacks are particularly dangerous 
+              because they can lead to data breaches, unauthorized data retrieval or modification, and potentially 
+              compromise the entire application or system. Preventative measures include input validation, parameterized 
+              queries, and employing security mechanisms like Web Application Firewalls (WAFs) to thwart SQLi attempts, 
+              protecting against this prevalent and destructive type of cyber attack.</ul>
+            <a href="./sqli" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="xss">
+            <br>
+            <br>
+            <h3 class="headera"> Cross Site <span>Scripting</span></h3>
+            <br>
+            <ul>Cross-Site Scripting (XSS) is a widespread security vulnerability that occurs when attackers inject 
+              malicious scripts, typically in the form of JavaScript, into web applications. These malicious scripts are 
+              then executed within the context of a victim's browser, often without their knowledge or consent. XSS 
+              attacks can be categorized into three types: stored, reflected, and DOM-based. They enable attackers to 
+              steal user data, hijack sessions, deface websites, redirect users to malicious sites, or deliver malware. 
+              Preventing XSS involves input validation, output encoding, implementing security headers (e.g., Content 
+              Security Policy or CSP), and keeping web application frameworks and libraries up-to-date. By addressing 
+              XSS vulnerabilities, organizations can safeguard their users' data and maintain the integrity of their web 
+              applications.
+            </ul>
+            <a href="./xss" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="htmli">
+            <br>
+            <br>
+            <h3 class="headera"> HTML <span>Injection</span></h3>
+            <br>
+            <ul>HTML Injection, also known as "HTML Injection Attack" or "Client-Side Injection," is a type of security 
+              vulnerability where an attacker inserts malicious HTML code or tags into a web application, typically 
+              through input fields or parameters. Unlike XSS, which focuses on injecting JavaScript code, HTML Injection 
+              specifically manipulates HTML content within the application. While both vulnerabilities may appear 
+              similar, HTML Injection does not execute scripts or interact with JavaScript. Instead, it manipulates the 
+              structure and presentation of web pages, potentially leading to defacement, phishing attacks, or other 
+              forms of manipulation. Prevention techniques involve input validation, output encoding, and ensuring 
+              secure handling of user-generated content. While HTML Injection and XSS share some similarities in terms 
+              of potential impact and mitigation strategies, they are conceptually distinct, as the former focuses 
+              solely on manipulating HTML content while the latter deals with JavaScript code execution within web 
+              applications.</ul>
+            <a href="./htmli" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="ci">
+            <br>
+            <br>
+            <h3 class="headera"> Command <span>Injection</span></h3>
+            <br>
+            <ul>Command injection is a critical security vulnerability that arises when an attacker can manipulate input 
+              fields or parameters within a software application to execute arbitrary system commands on the underlying 
+              server. This allows malicious actors to gain unauthorized access, control the server, exfiltrate data, or 
+              perform other malicious actions. Command injection vulnerabilities typically occur in applications that 
+              accept user inputs or data from untrusted sources and fail to properly validate or sanitize this input. To 
+              mitigate command injection risks, developers should implement strict input validation, use parameterized 
+              queries, and avoid the use of unsanitized user inputs in system commands. Regular security testing and 
+              code reviews are essential for identifying and addressing these vulnerabilities, ensuring the security and 
+              integrity of the application and server.</ul>
+            <a href="./commandi" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="coi">
+            <br>
+            <br>
+            <h3 class="headera"> Code <span>Injection</span></h3>
+            <br>
+            <ul>Code injection is a critical security vulnerability that allows attackers to insert and execute 
+              arbitrary code within an application, potentially compromising its functionality or security. This type 
+              of vulnerability arises when untrusted inputs are not adequately validated or sanitized, allowing attackers 
+              to manipulate and inject code, often in languages like PHP, Python, or JavaScript, that the application then 
+              unwittingly executes. Code injection attacks can result in unauthorized access, data theft, or complete 
+              control over the application. While code injection and command injection share similarities in that they 
+              involve injecting code into an application, code injection is a broader category that encompasses various 
+              injection types, including SQL injection, XSS (Cross-Site Scripting), and command injection. These attacks 
+              can have different targets and consequences, with command injection specifically focused on manipulating 
+              system commands, while code injection exploits weaknesses in the application's code execution process itself.</ul>
+            <a href="./codei" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="lfi">
+            <br>
+            <br>
+            <h3 class="headera"> Local File <span>Inclusion</span></h3>
+            <br>
+            <ul>Local File Inclusion (LFI), also known as "Path Traversal" or "Directory Traversal," is a security 
+              vulnerability that occurs when attackers manipulate user input in web applications to access files or 
+              directories outside the intended scope. This unauthorized file access can potentially lead to the exposure 
+              of sensitive data or compromise the server's file system. LFI attacks often target input validation or 
+              sanitization weaknesses, and mitigation involves implementing strict controls, using whitelists for file 
+              inclusions, and limiting access to sensitive directories. Regular security assessments and code reviews are 
+              essential for detecting and preventing LFI vulnerabilities, ensuring the security and integrity of web 
+              applications.</ul>
+            <a href="./lfi" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="rfi">
+            <br>
+            <br>
+            <h3 class="headera"> Remote File <span>Inclusion</span></h3>
+            <br>
+            <ul>Remote File Inclusion (RFI) is a security vulnerability that allows attackers to manipulate input in web 
+              applications to include and execute external files or scripts hosted on remote servers. This type of 
+              vulnerability occurs when an application improperly incorporates untrusted user input into file paths used 
+              for file inclusion. RFI can have severe consequences, including unauthorized code execution, data breaches, 
+              and system compromise. While RFI and LFI (Local File Inclusion) both involve file inclusion vulnerabilities, 
+              they differ in the source of the included files. RFI involves external files hosted remotely, whereas LFI 
+              focuses on local files hosted on the same server. RFI attacks are less common but equally dangerous. To 
+              mitigate RFI, developers should validate and sanitize user inputs, use whitelists for allowable file 
+              inclusions, and avoid dynamic file inclusion without proper safeguards. Regular security testing and code 
+              reviews are essential to detect and address RFI vulnerabilities, safeguarding web applications against 
+              external file inclusion attacks.</ul>
+            <a href="./rfi" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="ssti">
+            <br>
+            <br>
+            <h3 class="headera"> Server Side <span>Template Injection</span></h3>
+            <br>
+            <ul>Server-Side Template Injection (SSTI) is a critical web application vulnerability that occurs when an 
+              attacker can inject malicious code into templates or templates themselves are constructed from untrusted 
+              user inputs. This can lead to the execution of arbitrary code on the server, potentially compromising the 
+              entire application, stealing data, or allowing unauthorized access. SSTI attacks target server-side 
+              template engines, often used in web frameworks, to dynamically generate content. Attackers can manipulate 
+              the templates to insert code that is then executed by the server, posing a serious threat to application 
+              security. Prevention strategies include input validation, output encoding, and proper sanitization of user 
+              inputs, along with keeping template engines and web frameworks up-to-date to mitigate SSTI risks and ensure 
+              the integrity of web applications.</ul>
+            <a href="./ssti" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="hhi">
+            <br>
+            <br>
+            <h3 class="headera"> Host Header <span>Injection</span></h3>
+            <br>
+            <ul>Host Header Injection (HHI) is a web security vulnerability where an attacker manipulates the "Host" 
+              header of an HTTP request to trick a web application into processing requests intended for a different 
+              domain or subdomain. Exploiting this vulnerability can lead to various attacks, including session fixation, 
+              cross-site scripting (XSS), and even server-side request forgery (SSRF). Attackers can abuse the host header 
+              to subvert the application's logic or access restricted resources, potentially causing data breaches or 
+              unauthorized access. Mitigation strategies involve strict validation and sanitization of the host header, 
+              utilizing security mechanisms like Content Security Policy (CSP), and configuring the web server to reject 
+              invalid host headers, safeguarding against HHI threats and ensuring the security of web applications.</ul>
+            <a href="./hhi" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="ssrf">
+            <br>
+            <br>
+            <h3 class="headera"> Server Side <span>Request Forgery</span></h3>
+            <br>
+            <ul>Server-Side Request Forgery (SSRF) is a critical web application security vulnerability that arises when 
+              an attacker can manipulate input that is used to make requests to other resources or services from the 
+              server. This allows malicious actors to send requests to internal resources, potentially leading to data 
+              exposure, service disruption, or even remote code execution on the server. SSRF attacks can target 
+              internal systems or third-party resources accessible from the server, making them a significant threat. 
+              Prevention strategies include input validation, filtering, and whitelisting to restrict the allowed 
+              destinations for requests, as well as firewall rules and network segmentation to isolate sensitive 
+              internal resources, mitigating the risk of SSRF and safeguarding the security and integrity of web 
+              applications.</ul>
+            <a href="./ssrf" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="blf">
+            <br>
+            <br>
+            <h3 class="headera"> Business <span>Logic Flaws</span></h3>
+            <br>
+            <ul>Business Logic Flaws, represent security weaknesses that 
+              stem from improper handling of application-specific workflows and logic. These vulnerabilities occur when 
+              an application fails to enforce business rules, permissions, or constraints, allowing malicious actors to 
+              exploit deviations from intended behavior. Unlike traditional technical vulnerabilities, such as SQL 
+              injection or XSS, business logic flaws are often unique to each application and can lead to unauthorized 
+              actions, data leakage, financial fraud, or other malicious activities. Mitigation involves rigorous threat 
+              modeling, careful definition and enforcement of business rules, access controls, and continuous security 
+              testing and monitoring to identify and rectify these nuanced vulnerabilities, ultimately ensuring the 
+              robust security of the application's core functionality.  In an online marketplace, a business logic flaw 
+              might allow a user to manipulate the price of a product before purchasing it, potentially buying expensive 
+              items at a fraction of their actual cost, resulting in financial losses for the seller.</ul>
+            <a href="./business-logic-flaws" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="crlfi">
+            <br>
+            <br>
+            <h3 class="headera"> CRLF <span>Injection</span></h3>
+            <br>
+            <ul>Carriage Return Line Feed Injection (CRLF Injection or CRLFI) is a web security vulnerability that occurs 
+              when an attacker can inject malicious newline characters (carriage return and line feed) into an application's 
+              input fields or parameters. This manipulation can lead to various attacks, including HTTP response splitting, 
+              cookie poisoning, and cross-site scripting (XSS). CRLF injection can allow attackers to control or modify HTTP 
+              responses, potentially injecting malicious content, spoofing headers, or conducting session fixation attacks. 
+              Preventing CRLF injection requires strict input validation and sanitization, encoding user inputs, and adhering 
+              to secure coding practices. By addressing CRLF injection risks, web applications can maintain the integrity of 
+              their HTTP responses and mitigate the potential for abuse by malicious actors.
+            </ul>
+            <a href="./crlfi" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="emaili">
+            <br>
+            <br>
+            <h3 class="headera"> Email <span>Injection</span></h3>
+            <br>
+            <ul>Email Injection (Emaili) is a web security vulnerability that occurs when an attacker manipulates input 
+              fields, typically in web forms or email-related features, to inject malicious email content or headers. 
+              This can lead to unauthorized email sending, spamming, or phishing attacks. Email injection focuses on 
+              exploiting weaknesses in email-related functionality, often by injecting newline characters (such as CR 
+              and LF) and crafted email headers to deceive email systems or servers into processing emails in unintended 
+              ways. While Email Injection and CRLF Injection share some similarities, as both involve manipulating input 
+              to control system behavior, they are distinct in their target and impact. Email Injection specifically 
+              targets email functionality, aiming to misuse or manipulate email systems, whereas CRLF Injection focuses 
+              on HTTP responses and headers, often for web-based attacks like response splitting or cookie poisoning. So, 
+              while there are similarities, they are different in their primary objectives and contexts.</ul>
+            <a href="./emaili" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="fuv">
+            <br>
+            <br>
+            <h3 class="headera"> File Upload <span>vulnerabilities</span></h3>
+            <br>
+            <ul>File Upload Vulnerability is a significant security concern in web applications, occurring when an 
+              application allows users to upload files without sufficient validation and security measures. Attackers 
+              exploit this vulnerability by uploading malicious files, such as scripts or malware, that can harm the 
+              server or compromise user data. The consequences can be severe, ranging from remote code execution and 
+              data breaches to complete system compromise. Preventing file upload vulnerabilities involves rigorous input 
+              validation, allowing only safe file types, storing uploaded files in secure locations, and implementing 
+              access controls and proper sanitation to ensure that uploaded files do not pose a threat. Regular security 
+              testing and monitoring are essential to maintain robust protection against this pervasive threat.</ul>
+            <a href="./file-upload" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="csrf">
+            <br>
+            <br>
+            <h3 class="headera"> Cross Side <span>Request Forgery</span></h3>
+            <br>
+            <ul>Cross-Site Request Forgery (CSRF) is a web security vulnerability that occurs when a malicious website 
+              tricks a user's browser into making an unintended and unauthorized request to another site where the 
+              victim is authenticated. CSRF attacks typically target actions that change data or state, such as changing 
+              a password or making financial transactions, without the user's consent. Attackers exploit the user's 
+              trusted session to perform actions on their behalf, potentially leading to unauthorized changes or 
+              financial losses. Preventing CSRF involves using anti-CSRF tokens, validating and sanitizing user inputs, 
+              and implementing security headers like the SameSite attribute for cookies. By addressing CSRF risks, web 
+              applications can protect users from involuntary and unauthorized actions.</ul>
+            <a href="./csrf" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="or">
+            <br>
+            <br>
+            <h3 class="headera"> Open <span>Redirect</span></h3>
+            <br>
+            <ul>Open Redirect is a web security vulnerability that occurs when a web application allows an attacker to 
+              redirect users to external or untrusted websites by manipulating input parameters in a URL. This can trick 
+              users into believing they are visiting a legitimate site, while they are actually being redirected to a 
+              malicious one. Open redirects are often abused for phishing attacks, where attackers lure users to disclose 
+              sensitive information. Preventing open redirect vulnerabilities involves validating and sanitizing redirect 
+              URLs, avoiding the use of user-controlled input in redirection, and using a whitelist approach to specify 
+              allowed destinations. By addressing open redirect risks, web applications can safeguard users against 
+              deceptive and potentially harmful redirection attempts.</ul>
+            <a href="./open-redirect" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="jwt">
+            <br>
+            <br>
+            <h3 class="headera"> JSON Web Token <span>Flaws</span></h3>
+            <br>
+            <ul>JSON Web Token (JWT) vulnerabilities refer to security risks associated with the use of JWTs, a popular 
+              method for securely transmitting information between parties. Common JWT vulnerabilities include insecure 
+              key management, insufficient token validation, and token leakage. Insecure key management occurs when keys 
+              are not adequately protected, allowing attackers to forge tokens. Insufficient token validation can lead 
+              to unauthorized access, as tokens are not thoroughly validated. Token leakage happens when sensitive data 
+              is inadvertently stored within tokens and can be exposed. Preventing JWT vulnerabilities involves secure 
+              key storage, robust token validation, and careful handling of token payloads to ensure confidentiality and 
+              integrity. Regularly updating libraries and following best practices can help mitigate these risks, 
+              enhancing the security of applications relying on JWTs for authentication and authorization.</ul>
+            <a href="./jwt" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="cb">
+            <br>
+            <br>
+            <h3 class="headera"> Captcha <span>Bypass</span></h3>
+            <br>
+            <ul>Captcha Bypass is a security vulnerability that occurs when attackers find ways to circumvent or defeat 
+              Captcha mechanisms, which are designed to distinguish between humans and automated bots. Attackers employ 
+              various techniques, such as optical character recognition (OCR) and machine learning algorithms, to 
+              automatically solve Captchas and gain unauthorized access or perform malicious actions on websites or web 
+              applications. Captcha bypass undermines the primary purpose of Captchas, which is to protect against 
+              automated abuse, spam, and unauthorized access. Preventing Captcha bypass involves regularly updating and 
+              improving Captcha implementations, deploying additional security measures, and monitoring for unusual 
+              patterns and suspicious activities to maintain effective bot mitigation.</ul>
+            <a href="./captcha-bypass" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="mfa">
+            <br>
+            <br>
+            <h3 class="headera"> Multi Factor authentication <span>Bypass</span></h3>
+            <br>
+            <ul>MFA (Multi-Factor Authentication) or 2FA (Two-Factor Authentication) Bypass is a security vulnerability 
+              that occurs when attackers find ways to bypass or circumvent the additional layers of security provided by 
+              MFA or 2FA systems. These systems require users to provide two or more authentication factors, typically 
+              something they know (password) and something they have (a mobile device or token). Attackers may attempt 
+              to compromise the second factor, such as by stealing or duplicating a hardware token or using social 
+              engineering to gain access to the user's mobile device. MFA or 2FA bypass undermines the security benefits 
+              of these authentication methods, potentially allowing unauthorized access to accounts or systems. 
+              Preventing MFA or 2FA bypass involves securing both authentication factors, educating users about security 
+              risks, and implementing additional measures like biometric authentication or behavioral analysis. captcha 
+            bypass can be part of this.</ul>
+            <a href="./mfa" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>help@scriptjacker.in</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:help@scriptjacker.in" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2023 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>

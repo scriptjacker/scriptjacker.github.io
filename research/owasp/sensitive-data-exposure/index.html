@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../../assets/images/favicon.ico" type="image/x-png">
+    <title>Security Misconfigurations | ScriptJacker | OWASP</title>
+</head>
+<body oncontextmenu="return false">
+
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul> 
+    <li><a href="#google">1. Google Dorks</a></li>
+    <li><a href="#git">2. Github Dorks</a></li>
+    <li><a href="#manual">3. Manual Findings</a></li>
+    <li><a href="#crawler">&#10551; 3.1 Web Crawler Files</a></li>
+    <li><a href="#dir">&#10551; 3.2 Directory Listing</a></li>
+    <li><a href="#comment">&#10551; 3.3 Developer Comments</a></li>
+    <li><a href="#err">&#10551; 3.4 Error Messages</a></li>
+    <li><a href="#conf">&#10551; 3.5 Insecure Configuration</a></li>
+    <li><a href="#version">&#10551; 3.6 Version Control</a></li>
+    <li><a href="#response">&#10551; 3.7 Server Response</a></li>
+    <li><a href="#source">&#10551; 3.8 Source Code</a></li>
+    <li><a href="#auto">4. Automate Findings</a></li>
+    <li><a href="#bust">&#10551; 4.1 Directory Busting</a></li>
+    <li><a href="#js">&#10551; 4.2 JS Discovery</a></li>
+    <li><a href="#fuzz">&#10551; 4.3 Fuzzing</a></li>
+    <li><a href="#webarchive"> 5. Web Archive</a></li>
+    <li><a href="#fix">6. Mitigation</a></li>
+    <li><a href="#reference">7. Reference Reports</a></li>
+    <li><a href="#labs">8. Practice Labs</a></li>
+    <li><a href="#labs">8. Practice Labs</a></li> 
+    <li><a href="#labs">8. Practice Labs</a></li> 
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../../">Home</a></li>
+          <li><a href="../../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../">Owasp</a></li>
+                 <li><a href="../../recon">Recon</a></li>
+                <li><a href="../../bash">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../../contact">Contact</a></li>
+            <li><a href="../../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content">
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-tint"></i> Sensitive <span>Data Exposure</span></h3>
+          <br>
+          <br>
+          <ol class="list">
+            <ul>Sensitive data exposure or <span class="colord">Information Disclosure</span>, which is later <span class="colord">referred</span> to as or <span class="colord">combines</span> with cryptographic failures, represents a security vulnerability where confidential or <span class="colord">private information</span> is inadvertently or <span class="colord">improperly disclosed</span> to unauthorized parties due to various factors, including poor security practices, misconfigured systems, or inadequate access controls. This exposure not only jeopardizes the <span class="colord">confidentiality</span> and <span class="colord">integrity</span> of sensitive data but also poses significant risks such as data breaches, identity theft, financial fraud, and legal consequences.
+              <br>
+              <br>
+            <ul>Information disclosure is not always <span class="colord">exploitable</span>, but it can reveal valuable insights to hackers, allowing them to fine-tune their attacks and discover <span class="colord">vulnerabilities</span>. It can lead to attack surface <span class="colord">enumeration</span>, easier attack vector discovery, credential theft, social engineering, <span class="colord">reconnaissance</span>, and system manipulation. </ul>
+              <br id="google">
+              In the context of cryptographic failures, sensitive data exposure is <span class="colord">closely related</span>. Cryptographic failures specifically point to weaknesses or <span class="colord">flaws in the encryption</span> and protection mechanisms used to <span class="colord">safeguard sensitive data</span>. When cryptographic measures are not implemented correctly, it can lead to <span class="colord">sensitive data exposure</span>. For example, inadequate encryption algorithms, weak ciphers, and poor key management can all contribute to data being exposed due to <span class="colord">cryptographic failures</span>.</ul>
+            <br>
+            <h3 class="headerc">1. <span>Google</span> <span class="colorc">Dorking</span></h3>
+            <ul>Google Dorking, which involves <span class="colord">crafting</span> specialized <span class="colord">search queries</span> to uncover specific content on the internet, can play a pivotal role in information disclosure and sensitive data exposure. By tailoring search queries, malicious actors or security researchers can pinpoint websites or web applications that may inadvertently reveal <span class="colord">sensitive information</span>. For instance, they can identify websites with <span class="colord">misconfigured</span> security settings, <span class="colord">exposed directories</span>, or improperly protected documents. This can lead to the unintended exposure of confidential data such as configuration files, user credentials, financial records, and more.</ul>
+            <br>
+            <ul><span class="colorb">Manual Approach</span> <i class="fas fa-arrow-right"></i> The manual approach for finding sensitive information through Google Dorks involves crafting specific search queries to uncover potentially exposed data on the internet. You define your search goal, create targeted queries, use advanced search operators, and analyze the search results, looking for sensitive information. Below are some list of useful dorks with their output, but those are not limited and you can craft your own dorks.</ul>
+            <pre class="prettyprint">
+inurl:/phpMyAdmin/index.php?server=1
+inurl:node_modules/ua-parser-js
+index of /wp-admin.jpg site:bd
+phpMyAdmin SQL Dump ext:txt</pre>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/gd1.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/gd2.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/gd4.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/gd6.png" alt="">
+</div>
+<ul>The <a target="_blank" href="https://www.exploit-db.com/google-hacking-database"><span class="colord">Google Hacking Database (GHDB)</span></a> and this <a target="_blank" href="https://taksec.github.io/google-dorks-bug-bounty/"><span class="colord">website</span></a> is a collection of Google search queries that can be used to uncover sensitive information and information disclosure vulnerabilities. These queries are designed to help security professionals, ethical hackers, and penetration testers identify potentially exposed data on the internet.</ul>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/ghdb.png" alt="">
+</div>           
+<br>
+            <ul><span class="colorb">Automatic Approach</span> <i class="fas fa-arrow-right"></i> The automatic approach involves using specialized tools or scripts that automate the process of searching for sensitive information using predefined Google Dorks. These tools can quickly scan large portions of the internet for potential data exposure.</ul>
+            <br>
+            <ul>Tools that can help you are <a target="_blank" href="https://github.com/opsdisk/pagodo"><span class="colord">pagodo</span></a>, <a target="_blank" href="https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan/"><span class="colord">FGDS</span></a>, etc that are open source on github. Although you can design your own tool and can inform us we will list your tool in this page only if it is beneficial.</ul>
+            <br>
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/cFOBUYaxdWI?si=1wo96mQAKcBYrFNw" frameborder="0" allowfullscreen></iframe>
+            </div>      
+            <br id="git">
+            <br>
+            <br>
+            <h3 class="headerc">2. <span>Github</span> <span class="colorc">Dorking</span></h3>
+            <ul>GitHub dorking, a specialized search technique for <span class="colord">GitHub repositories</span>, can help find sensitive information or information disclosure by identifying exposed <span class="colord">configuration files</span>, authentication tokens, private repository metadata, source code vulnerabilities, sensitive documentation, API endpoints, and username enumeration. It's essential to use this approach responsibly, respecting privacy and security, and to report any security issues found to the repository owners rather than engaging in <span class="colord">unauthorized access</span> or misuse of the discovered data.</ul>
+            <br>
+            <ul><span class="colorb">Manual Approach</span> <i class="fas fa-arrow-right"></i> Manually searching for sensitive information or information disclosure on GitHub involves using specific search queries within the GitHub platform. You can visit GitHub and utilize the search bar to enter dork-like queries with operators that target specific file types, keywords, or patterns. For example, you can search for configuration files, API keys, or other sensitive data by specifying relevant terms and filtering for specific repositories or code snippets. Below are list of some dorks but those are just tip of iceberg and you can design your own dorks.</ul>
+            <pre class="prettyprint">
+"api_hash" "api_id"
+path:*.php db_connect
+"testphp.vulnweb.com" password
+"company.com" token</pre>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/git1.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/git2.png" alt="">
+</div>
+            <ul><span class="colorb">Automatic Approach</span> <i class="fas fa-arrow-right"></i> The automatic approach for GitHub dorking relies on specialized tools or scripts designed to automate the process of searching GitHub repositories for sensitive information or information disclosure. These tools leverage the GitHub API to perform more extensive and systematic searches. They can scan a vast number of repositories quickly and provide detailed results.</ul>
+            <br>
+            <ul>Examples of such tools include <a target="_blank" href="https://github.com/trufflesecurity/trufflehog"><span class="colord">TruffleHog</span></a>, <a target="_blank" href="https://github.com/michenriksen/gitrob"><span class="colord">GitRob</span></a>, <a target="_blank" href="https://github.com/obheda12/GitDorker"><span class="colord">GitDorker</span></a> and <a target="_blank" href="https://github.com/gitleaks/gitleaks"><span class="colord">Gitleaks</span></a>, etc. These all are publicly available on github</ul>
+            <br>
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/l0YsEk_59fQ?si=MAAdGjSk-gaLlwLD" frameborder="0" allowfullscreen></iframe>
+            </div>            
+            <br id="manual">
+            <br>
+            <br id="crawler">
+            <h3 class="headerc">3. <span>Find Sensitive Data</span> <span class="colorc">Manually</span></h3>
+            <br>
+            <h3 class="headerd">1. <span>Web Crawler Files</span></h3>
+            <ul>Web crawlers are automated programs that systematically browse the web to collect data from websites. Web crawler files can potentially help identify sensitive information and information disclosure in various ways. </ul>
+            <br>
+            <ul><span class="colorb">Identifying hidden files and directories</span> <i class="fas fa-arrow-right"></i> Web crawlers can be used to identify hidden files and directories that may contain sensitive information. This information can include passwords, credit card numbers, and other sensitive data. Crawlers can also be used to identify files that are not linked to from any other pages on the website, which may indicate that they contain sensitive information.</ul>
+            <pre class="prettyprint">
+//robots.txt file may contain
+User-agent: *
+Disallow: /private/
+Disallow: /admin-panel67/
+Disallow: /sensitive-data.txt
+
+//sitemap.xml file may contain
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;url>
+  &lt;loc>http://www.ex.com/pvt-data.html&lt;/loc>
+  &lt;lastmod>2023-11-08&lt;/lastmod>
+  &lt;changefreq>weekly&lt;/changefreq>
+  &lt;priority>0.8&lt;/priority>
+&lt;/url>
+&lt;url>
+  &lt;loc>http://www.ex.com/secret.htm&lt;/loc>
+  &lt;lastmod>2023-11-08&lt;/lastmod>
+  &lt;changefreq>monthly&lt;/changefreq>
+  &lt;priority>0.6&lt;/priority>
+&lt;/url>
+&lt;/urlset></pre>
+<ul><span class="colorb">Testing for directory listing</span> <i class="fas fa-arrow-right"></i> Web crawlers can be used to test for directory listing vulnerabilities. These vulnerabilities occur when a web server allows users to list the contents of a directory without proper authorization. This can expose sensitive files that are not intended to be publicly accessible.</ul>
+<pre class="prettyprint">
+User-agent: *
+Disallow: /ftp/
+Disallow: /css/
+Disallow: /images/</pre>
+<ul><span class="colorb">Investigating API endpoints</span> <i class="fas fa-arrow-right"></i> Web crawlers can be used to investigate API endpoints. APIs are interfaces that allow software applications to communicate with each other. Poorly secured APIs can expose sensitive data or allow unauthorized access to systems.</ul>
+            <pre class="prettyprint">
+User-agent: *
+Disallow: /api/
+Disallow: /api/v1/users/
+Disallow: /api/v1/login/</pre>
+<ul><span class="colorb">Examining URL structures</span> <i class="fas fa-arrow-right"></i> Web crawlers can also be used to examine URL structures. This can reveal information about the website's data storage patterns or authentication mechanisms, which can be used to identify potential security vulnerabilities.</ul>
+<pre class="prettyprint" id="dir">
+User-agent: *
+Disallow: /search?q=
+Disallow: /*?param1=&pparam2=
+Disallow: /*?category=</pre>
+<ul><span class="colorb">Using Web Archive</span> <i class="fas fa-arrow-right"></i> You can use web archive for finding old contents of web crawler files. For example your search for https://example.com/robots.txt in web archive and then look at its old content. You may find some sensitive page that is removed from that in present web crawler but still exist and not changed.</ul>
+    <pre class="prettyprint">
+// old robots.txt find in web archive
+User-agent: *
+Disallow: /category/
+Disallow: /admin-panel-269
+Disallow: /search?q=
+
+// new robots.txt present in website
+User-agent: *
+Disallow: /category/
+Disallow: /search?q=</pre>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/webarchive.png" alt="">
+</div>
+<br>
+<h3 class="headerd">2. <span>Directory Listing</span></h3>
+ <ul>Directory listing is a feature of web servers that allows users to view a list of files and directories on the server. This can be useful for finding files that are not linked to from any web pages, or for finding hidden files and directories. However, directory listing can also be a security risk, as it can allow attackers to see what files are on the server and potentially exploit vulnerabilities in the server software.</ul>
+<div class="image">
+    <img draggable="false" class="tilt" src="../../../assets/images/dirlist1.png" alt="">
+    <img draggable="false" class="tilt" src="../../../assets/images/dirlist2.png" alt="">
+  </div>
+  <ul><span class="colorb">Using Google dorks</span> <i class="fas fa-arrow-right"></i> Google dorks are special search queries that can be used to find sensitive information on websites. Some <a target="_blank" href="https://gist.github.com/cmbaughman/b1d9e25d5774aba7fa12"><span class="colord">Google Dorks</span></a> that can be used to find directory listings include:</ul>
+            <pre class="prettyprint">
+inurl:example.com intitle:"index of"
+inurl:example.com intitle:"index of /" "*key.pem"
+inurl:example.com ext:log
+inurl:example.com intitle:"index of" ext:sql|xls|xml|json|csv
+inurl:example.com "MYSQL_ROOT_PASSWORD:" ext:env OR ext:yml -git
+inurl:example.com intitle:"index of" "config.db"
+inurl:example.com allintext:"API_SECRET*" ext:env | ext:yml
+inurl:example.com intext:admin ext:sql inurl:admin
+inurl:example.com allintext:username,password filetype:log</pre>
+<ul><span class="colorb">Using Web Crawler Files</span> <i class="fas fa-arrow-right"></i> Web crawler Files can be useful for finding directory listing, or for finding hidden files and directories. </ul>
+<pre class="prettyprint">
+User-agent: *
+Disallow: /ssh/
+Disallow: /assets/
+Disallow: /user/list/</pre>
+<ul><span class="colorb">Through Web Browsers</span> <i class="fas fa-arrow-right"></i> Using a web browser to access a directory that does not exist. If the servear is configured to allow directory listing, the browser will display a list of the files and directories in that directory.</ul>
+<br>
+<ul>When you visit a directory that does not exist on a web server, the server will typically return a 404 error page. This page will usually contain a message indicating that the directory does not exist. However, some web servers are configured to allow directory listing, even for directories that do not exist. When directory listing is enabled, the server will generate a list of the files and directories in the parent directory of the requested directory. This list will be displayed in a web page, which will be returned to the user.</ul>
+            <pre class="prettyprint">
+Index of /
+
+Name	       Last                Size
+index.html	 2023-03-08 12:00:00 1024 bytes
+about.html	 2023-03-08 12:00:00 512 bytes
+contact.html 2023-03-08 12:00:00 256 bytes</pre>
+<ul><span class="colorb">Using httpx tool</span> <i class="fas fa-arrow-right"></i> I know it is kind automatic approach but it's important to mention here. The command "cat live.txt | httpx -td -title" is used to find directory listings on a web server. The command takes a list of live subdomains from a file called "live.txt" and then uses the httpx tool to scan each subdomain for directory listings. The "-td" flag tells httpx to only display the title of each directory listing, and the "-title" flag tells httpx to only display the title of each web page. </ul>
+<pre class="prettyprint" id="comment">
+cat live.txt | httpx -td -title</pre>
+<br>
+<h3 class="headerd">3. <span>Developer Comments</span></h3>
+<ul>Developer comments in source code or configuration files can sometimes inadvertently reveal sensitive information and contribute to information disclosure or data exposure. These comments, while intended to provide context and documentation, can be overlooked or not properly sanitized, leading to security risks. It can reveal information like API keys, path or file disclosure, system information/version or credentials, etc. </ul>
+<br>
+<ul><span class="colorb">Manual Code Review</span> <i class="fas fa-arrow-right"></i> Review HTML, CSS, and JavaScript files manually, looking for comments within the code. You can click ctrl+f and search for // or /* or &lt;!-- so you can find comments directly.</ul>                
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Vulnerable Website
+    &lt;!-- Running on PHP 5.6.30 - Consider upgrading for security. --&gt;
+  &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- The password for the admin panel is &#x27;admin@784&#x27;. --&gt;
+  &lt;div id=&quot;content&quot;&gt;
+    &lt;!-- Include the API key here for access: &#x27;9876543210zyxwvu&#x27; --&gt;
+    &lt;!-- File path for sensitive data: /var/www/html/secrets/passwords.txt --&gt;
+    &lt;!-- TODO: Implement user authentication --&gt;
+    &lt;script src=&quot;/path/to/old-library.js&quot;&gt;
+    &lt;!-- Some sensitive debug information --&gt;
+    &lt;!-- Debug: Disable this on the production server --&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<ul><span class="colorb">Using Version Control System</span> <i class="fas fa-arrow-right" id="err"></i> Version Control Systems (VCS) are software tools that help developers track changes in their codebase over time. They allow developers to manage different versions of their source code and collaborate effectively. In the context of developer comments, version control systems store the history of code changes, including comments, enabling developers to view, compare, and recover older versions of code, including comments that may have been removed or modified.</ul>
+<ul>Require More information so put message in <a target="_blank" href="../../../contact/"><span class="colord">contact us</span></a> box.</ul>    
+<br>
+<h3 class="headerd">4. <span>Error Messages</span></h3>
+<ul>Improper Error Handling can be a valuable source of information for attackers. They can reveal the inner workings of a system, including the technologies used, the software versions, and the configuration settings. It occurs when an application or website provides error messages that reveal more information than they should. This information can be used to identify vulnerabilities that can be exploited to gain access to the system or to steal sensitive data.</ul>
+<br>
+<ul>Here are some known places where error message can be be seen.</ul>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/error5.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/error.gif" alt="">
+</div>
+<ul><span class="colorb">Error Pages</span> <i class="fas fa-arrow-right" id="err"></i> When a website encounters a critical error, it may redirect users to a dedicated error page (e.g., a 404, 403, etc). These pages often include error messages and can include sensitive information like database error, path or version disclosure, stack traces, etc. </ul>
+<br>
+<div class="video-container2">
+  <video controls class="video" src="../../../assets/images/error7.mp4" type="video/mp4"></video>
+  <video controls class="video" src="../../../assets/images/error8.mp4" type="video/mp4"></video>
+</div>
+<ul><span class="colorb"> Form Fields:</span> <i class="fas fa-arrow-right" id="err"></i> When users submit forms on websites, error messages related to form validation (e.g., missing required fields, version disclosure, descriptive error, etc) can appear and exposure sensitive information. It is not important that is should be login or signup but can be forgot password, newsletter, contact us, deleting account, feedback, review writing, etc. </ul>
+  <div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/error4.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/error6.jpeg" alt="">
+</div>
+<ul><span class="colorb">Server Responses</span> <i class="fas fa-arrow-right" id="err"></i> It can also give error in it's body including sensitive or not required information which later can be used by attacker to steal information or to gain unauthorized access. We can try put invalid things in request and see the response  containing error or it contain extra information like if we ask for username so it also provide its email or id in response.</ul>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/error1.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/error2.png" alt="">
+</div>
+<ul><span class="colorb">Normal Pages</span> <i class="fas fa-arrow-right" id="err"></i> Normal pages like blogs, search box, contact us, etc can also provide sensitive information at the time of encountering error messages that may reveal sensitive data. It can reveal information like connection failed or if attacker ty to put some invalid text or encoded information so it can show different type of errors.</ul>
+<pre class="prettyprint">
+  console.log("Error: " + error.message.replace(/password|credit card number|social security number/gi, "*****"));</pre>
+<ul><span class="colorb">The browser's console</span> <i class="fas fa-arrow-right" id="err"></i> The browser's console is a tool that allows you to view error messages and other information about the website. To open the console, press Ctrl+Shift+J (Windows) or Command+Option+J (Mac).</ul>
+<br>
+<ul>Here are some ways in which error messages can be used for information disclosure</ul>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/error3.png" alt="">
+</div>
+<pre class="prettyprint">
+  Error: An error occurred while processing your request.
+
+Stack trace:
+  at /home/user/public_html/index.php:123
+  at /home/user/public_html/functions.php:456
+  at /home/user/public_html/config.php:1011
+  at /home/user/public_html/index.php:1</pre>
+<ul><span class="colorb">Stack Traces or Debugging Information</span> <i class="fas fa-arrow-right" id="err"></i> Error messages that include detailed stack traces or debugging information can reveal internal code and server details. A stack trace is a list of the functions that were called leading up to an error. It can be used to identify the source of the error and to debug the code. This type of error can be also seen in the browser console.</ul>
+<pre class="prettyprint">
+  Error: Could not find file /www/html/home/user/secret.txt</pre>
+<ul><span class="colorb">Path Disclosure</span> <i class="fas fa-arrow-right" id="err"></i> Some error messages may disclose file paths or directory structures on the server. In above error it tell that it could not find secret.txt but it disclosure full path.</ul>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/error1.png" alt="">
+</div>
+<pre class="prettyprint">
+  Error: SQLSTATE[HY000]: General error: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE name = 'John'' at line 1</pre>
+<ul><span class="colorb">Database Errors</span> <i class="fas fa-arrow-right" id="err"></i> Errors related to database operations might expose SQL queries, table names, or database connection details. This information can be used to craft SQL injection attacks.</ul>
+<pre class="prettyprint">
+"The username johndoe does not exist."
+"The password for the username johndoe is incorrect."
+"The username johndoe is locked."
+"The username johndoe has been disabled."</pre>
+<ul><span class="colorb">Credential Confirmation</span> <i class="fas fa-arrow-right" id="err"></i> In certain cases, login error messages may disclose whether a username is valid or not or username is correct but password incorrect and verbose error. Attackers can use this to enumerate valid usernames for brute force attacks.</ul>
+<br>
+<ul><span class="colorb">Sensitive Data Validation</span> <i class="fas fa-arrow-right" id="err"></i> Error messages during user registration or password reset processes can indicate whether a particular email address is registered with the site. Attackers can use this to identify valid user accounts.</ul>
+<ul>For example: If we request a password reset token so site should show that "If user is registered he will receive email" but it shows that "User is not registered".</ul>
+<pre class="prettyprint">
+//request
+GET /api/users/1 HTTP/1.1
+Host: example.com
+id=32
+
+//response
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "status": 200,
+  "message": "User with test@gmail.com of id=32 has already been deleted one day ago."
+}
+</pre>
+<ul><span class="colorb"> Response Length</span> <i class="fas fa-arrow-right" id="err"></i> By observing error message lengths, attackers might determine whether their input had an impact on the application's behavior. For example, when entering encoded things in parameter so response length is different and page react differently. Indicating potential data validation issues.</ul>
+<br>
+<ul>Guidelines for Crafting Effective Error Messages</ul>
+<ol class="list">
+  <li><span class="colorb">Use encoded characters in parameter values</span> <i class="fas fa-arrow-right"></i> For example, you could encode the characters "admin" as "%61%64%6D%69%6E" or double encoding or encode symbols. This may cause the server to return an error message revealing sensitive information.
+  </li>
+  <br>
+  <li><span class="colorb">Use long parameter values</span> <i class="fas fa-arrow-right"></i> Some servers may have a limit on the length of parameter values. If you exceed this limit, the server may return an error message that contains the sensitive information.</li>
+  <br>
+  <li><span class="colorb">Use invalid parameter values</span> <i class="fas fa-arrow-right"></i> Some servers may not handle invalid parameter values correctly. If you provide an invalid parameter value, the server may return an error message that contains information.
+  </li>
+  <br>
+  <li><span class="colorb">Use multiple parameter values</span> <i class="fas fa-arrow-right"></i>  Some servers may allow you to specify multiple values for a single parameter. If you provide multiple values, the server may return an error message that contains a list of the values that were provided. This could reveal sensitive information, such as a list of usernames or passwords.
+  </li>
+  <br>
+  <li><span class="colorb">Use multiple parameters</span> <i class="fas fa-arrow-right"></i> Some servers may allow you to specify multiple parameters. If you provide multiple parameters, the server may return error.</li>
+  <br>
+  <li  id="conf"><span class="colorb">Use a combination of techniques</span> <i class="fas fa-arrow-right"></i> You can combine multiple techniques to increase the likelihood of triggering an error that contains sensitive information. For example, you could use encoded characters in parameter values and also use long parameter values.</li>
+  <br>
+  </ol>
+<br>
+<h3 class="headerd">5. <span>Insecure Configuration</span></h3>
+<ul>Insecure configurations for HTTP methods can lead to a variety of attacks, including information disclosure, cross-site scripting (XSS), and remote code execution (RCE).</ul>
+<br>
+<ul>The following HTTP methods can give you reward if enabled:</ul>
+<ul><span class="colorb">TRACE</span> <i class="fas fa-arrow-right" id="err"></i> This method echoes back to the client the same string that was sent to the server. This can be used to test the functionality of a server or to identify vulnerabilities.</ul>
+<ul><span class="colorb">OPTIONS</span> <i class="fas fa-arrow-right" id="err"></i> This method returns a list of the HTTP methods that are supported by the server. This can be used to determine what methods can be used to attack the server.</ul>
+<ul><span class="colorb">PUT</span> <i class="fas fa-arrow-right" id="err"></i> This method allows the client to upload a file to the server. This can be used to upload malicious files or to exploit vulnerabilities in the server's file upload functionality.</ul>
+<ul><span class="colorb">DELETE</span> <i class="fas fa-arrow-right" id="err"></i> This method allows the client to delete a file from the server. This can be used to delete sensitive files or to exploit vulnerabilities in the server's file deletion functionality.</ul>
+<br>
+<ul>There many ways to find insecure configurations for HTTP methods. Here are few listed:</ul>
+<ul><span class="colorb">CURL</span> <i class="fas fa-arrow-right" id="err"></i> curl to send a request to the server. If the server responds with a 200 or 2xx OK status code, then the method is enabled. You can simply use OPTION HTTP method to check it will display which HTTP method is enabled.</ul>
+<pre class="prettyprint">
+curl -v -X OPTIONS http://www.example.com</pre>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/http2.png" alt="">
+</div>
+<ul><span class="colorb">Web Browser</span> <i class="fas fa-arrow-right" id="err"></i> If the browser displays a warning message when you try to access a page, then the server is likely using an insecure configuration. Go to inspect elements <i class="fas fa-arrow-right"></i> network tab <i class="fas fa-arrow-right"></i> click all tab <i class="fas fa-arrow-right"></i> select request <i class="fas fa-arrow-right"></i> right clcik select edit and resend <i class="fas fa-arrow-right"></i> change http method and send, If 2xx returned then enabled.</ul>
+<br>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/http3.png" alt="">
+</div>
+<ul><span class="colorb">Web Proxy</span> <i class="fas fa-arrow-right" id="err"></i> Burp Suite or OWASP ZAP to intercept and analyze HTTP traffic. If you see any HTTP requests that are using insecure methods or you can try to change the http method and if 200 ok or 2xx returned, then the server is likely using insecure configurations. </ul>
+<pre class="prettyprint">
+//before
+GET / HTTP/1.1
+Host: www.example.com
+
+//after
+TRACE / HTTP/1.1
+Host: www.example.com</pre>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/http1.png" alt="" >
+  <img draggable="false" class="tilt" src="../../../assets/images/http4.png" alt="">
+</div>
+<ul><span class="colorb">NMAP</span> <i class="fas fa-arrow-right" id="err"></i> Nmap script scan for http-methods can be used to check which method is enabled.</ul>
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/insecureconf.jpeg" alt="">
+</div>
+<ul id="version"><span class="colorb">Important</span> <i class="fas fa-arrow-right" id="err"></i> You should first try to find which method is allowed through OPTIONS HTTP method, and nothing comes or unexpected result then search for specific HTTP method like trace. If you receive 200 OK or 2XX code so it means that method iis enabled.</ul>
+<br>
+<br>
+<h3 class="headerd">6. <span>Version Control System</span></h3>
+<ul>Version control systems (VCS), such as Git, SVN, or Mercurial, are powerful tools for tracking changes in source code and collaborating on software projects. However, if sensitive information is committed to a repository, it poses a significant security risk. VCS can be used to identify sensitive data or information disclosure by tracking changes to files over time. A attacker can try to visit /.git or /git.</ul>  
+<div class="image">
+  <img draggable="false" class="tilt" src="../../../assets/images/vcs1.png" alt="">
+  <img draggable="false" class="tilt" src="../../../assets/images/vcs2.png" alt="">
+</div>
+<br>
+<ul>Some ways that attacker can use to identify VCS.</ul>
+<ul><span class="colorb">Google Dorks</span> <i class="fas fa-arrow-right" id="err"></i> They can be used to find VCS repositories, as well as other sensitive information, such as passwords and credit card numbers. These below are just few dorks, you can combine dorks for better result.</ul>
+<pre class="prettyprint">
+inurl:.git
+inurl:.svn
+inurl:.hg
+site:target.com inurl:.git
+inurl:source control
+inurl:version control
+“.git” intitle:”Index of”
+filetype:git -github.com inurl:”/.git”</pre>
+<ul><span class="colorb">Web Archive</span> <i class="fas fa-arrow-right" id="err"></i> Web archives are collections of web pages that have been preserved over time. They can be a valuable resource for finding information that has been deleted or changed from the live web. You can see for .git, .svn or .hg there like https://target.com/.git in web archive website.</ul>
+<br>
+<ul><span class="colorb">Directory Traversal</span> <i class="fas fa-arrow-right" id="err"></i> Attempt to access common VCS directories manually like .git, .svn, or .hg to view configuration files and commit history.</ul>
+<pre class="prettyprint">
+https://target.com/.git/config
+https://target.com/.git
+https://target.com/.svn</pre>
+<ul><span class="colorb">Github Dorks</span> <i class="fas fa-arrow-right" id="err"></i> GitHub dorks are a type of Google search query that can be used to find sensitive information on GitHub. They can be used to find VCS repositories, These below are just few you can combine to get better results.</ul>
+<pre class="prettyprint" id="response">
+"target.com" .git
+"target.com" .svn
+"target.com" git
+"target.com" source control
+"target.com" version control</pre>
+<br>
+<h3 class="headerd">7. <span>Server Response</span></h3>
+<ul >Information disclosure through server responses can occur due to various misconfigurations or vulnerabilities. Here are some server responses may inadvertently leak sensitive information:</ul>  
+<ul><span class="colorb">Error Message</span> <i class="fas fa-arrow-right"></i> The server is configured to display detailed error messages, revealing internal information.</ul>
+<pre class="prettyprint">
+//Request
+GET /nonexistent-page HTTP/1.1
+
+//Response
+HTTP/1.1 404 Not Found
+Server: Apache/2.4.18 (Ubuntu)
+Content-Type: text/html
+
+{ "status":404 "message":"Apache/2.4.18 (Ubuntu) Server at example.com Port 80" }</pre>
+  <ul><span class="colorb">Directory Listing</span> <i class="fas fa-arrow-right"></i> Directory listing is enabled, exposing the contents of directories.</ul>
+<pre class="prettyprint">
+//Request
+GET /private/ HTTP/1.1
+
+//Response
+HTTP/1.1 200 OK
+Server: Microsoft-IIS/10.0
+Content-Type: text/html
+
+&lt;html>
+&lt;head>
+&lt;title>Index of /private&lt;/title>
+&lt;/head>
+&lt;body>
+  &lt;h1>Index of /private&lt;/h1>
+  &lt;ul>
+        &lt;li><a href="docs/">docs/&lt;/a>&lt;/li>
+        &lt;li><a href="data.csv">data.csv</a>&lt;/li>
+        &lt;/ul>
+  &lt;hr>
+    &lt;address>Microsoft-IIS/10.0 Server at example.com Port 80&lt;/address>
+&lt;/body>
+&lt;/html></pre>
+  <ul><span class="colorb">Server Headers</span> <i class="fas fa-arrow-right"></i> Server headers provide information about the web server.</ul>
+<pre class="prettyprint">
+//Request
+GET / HTTP/1.1
+
+//Response
+HTTP/1.1 200 OK
+Server: nginx/1.14.0 (Ubuntu)
+Content-Type: text/html; charset=UTF-8
+</pre>
+  <ul><span class="colorb">Verbose HTTP Headers</span> <i class="fas fa-arrow-right"></i>  HTTP headers contain verbose information.</ul>
+<pre class="prettyprint">
+//Request
+GET / HTTP/1.1
+
+//Response
+HTTP/1.1 200 OK
+Server: Apache/2.4.18 (Ubuntu)
+X-Powered-By: PHP/7.2.4
+Content-Type: text/html; charset=UTF-8
+</pre>
+  <ul><span class="colorb">Exposed Database Errors</span> <i class="fas fa-arrow-right"></i> Database errors are exposed in responses.</ul>
+<pre class="prettyprint">
+//Request
+GET /user/123 HTTP/1.1
+
+//Response
+HTTP/1.1 500 Internal Server Error
+Server: Apache/2.4.18 (Ubuntu)
+Content-Type: text/html
+
+&lt;html>
+&lt;head>
+&lt;title>Internal Server Error&lt;/title>
+&lt;/head>
+&lt;body>
+    &lt;h1>Internal Server Error&lt;/h1>
+    &lt;p>Database error: SQL syntax error near 'OR 1=1' at line 1&lt;/p>
+&lt;/body>
+&lt;/html></pre>
+  <ul><span class="colorb">Exposed Session Tokens</span> <i class="fas fa-arrow-right"></i> Session tokens are inadvertently disclosed in responses.</ul>
+<pre class="prettyprint" id="source">
+  Request: GET /dashboard HTTP/1.1
+Response:
+HTTP/1.1 200 OK
+Server: Apache/2.4.18 (Ubuntu)
+Content-Type: text/html
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;User Dashboard&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Welcome, User123!&lt;/p&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;session_token&quot; value=&quot;abcdef123456&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<br>   
+  <h3 class="headerd">8. <span>View Source Code</span></h3>
+  <ul>The frontend source code can provide verious information like: Credentials, Comments with Sensitive Information, Debugging Information, Exposed API Keys, Unprotected Endpoints, Information Leakage through Error Handling, hidden fields, etc.</ul> 
+  <div class="image">
+    <img draggable="false" class="tilt" src="../../../assets/images/sourcecode.png" alt="">
+  </div>
+  <br id="auto">
+  <br>
+  <br id="bust">
+  <h3 class="headerc">4. <span>Information Disclosure</span> <span class="colorc">Automatic Approach</span></h3>
+  <br>
+  <h3 class="headerd">1. <span>Directory Brute forcing</span></h3>
+  <ul>Directory busting is a technique used to discover hidden files and directories on a web server. It can be used to find sensitive information, such as configuration files, database credentials, version control system, error pages, directory listing, backup files, source code, log files and all other things that you have read upwards.</ul>
+  <ul>Directory busting can be a very effective way to find sensitive information on a web server. However, it is important to note that directory busting can also be a time-consuming process. The number of directories and files that you need to search can be very large, and it can take a long time to find anything sensitive.</ul>
+  <br>
+  <ul><a target="_blank" href="https://github.com/OJ/gobuster"><span class="color">Gobuster</span></a> <i class="fas fa-arrow-right"></i> Gobuster is a similar tool to Dirbuster, but it is more powerful and has a wider range of features. It can be used to brute-force directories, files, and DNS records. It can also be used to identify hidden files and directories, as well as to identify vulnerabilities in a web application.</ul> 
+  <pre class="prettyprint">
+gobuster dir -u http://target.com/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</pre>
+    <ul><a target="_blank" href="https://github.com/KajanM/DirBuster"><span class="color">Dirbuster</span></a> <i class="fas fa-arrow-right"></i> Dirbuster is a command-line tool that can be used to brute-force directories on a web server. It can be used to find hidden files and directories, as well as to identify vulnerabilities in a web application.</ul> 
+    <pre class="prettyprint">
+dirbuster -u http://target.com/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</pre>
+      <ul><a target="_blank" href="https://github.com/epi052/feroxbuster"><span class="color">Feroxbuster</span></a> <i class="fas fa-arrow-right"></i> FeroxBuster is a high-performance directory and file bruteforcer. It can be used to brute-force directories and files on a web server. It can also be used to identify hidden files and directories, as well as to identify vulnerabilities in a web application.</ul> 
+  <pre class="prettyprint">
+feroxbuster -u http://example.com/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</pre>
+    <ul><a target="_blank" href="https://portswigger.net/burp/communitydownload"><span class="color">Burpsuite</span></a> <i class="fas fa-arrow-right"></i> Burp Suite is a web application security testing tool that can be used to identify vulnerabilities in a web application. It can be used to brute-force directories and files, as well as to identify hidden files and directories.</ul> 
+  <pre class="prettyprint" id="js">
+Target -> Site map -> Add -> Directory enumeration -> Start scan</pre>
+<ul><a target="_blank" href="https://github.com/daviddias/node-dirbuster/tree/master/lists"><span class="color">Wordlists</span></a> <i class="fas fa-arrow-right"></i> Here is list for wordlists that will help you. In kali linux their are pre installed wordlists.</ul>
+<br>
+<ul><a target="_blank" href="https://github.com/gmelodie/awesome-wordlists"><span class="color">Wordlists</span></a> <i class="fas fa-arrow-right"></i> Here is list for wordlists that will help you. In kali linux their are pre installed wordlists.</ul>  
+    <br>
+    <h3 class="headerd">2. <span>Javascript Recon</span></h3>
+    <ul>JavaScript recon is a technique used to extract sensitive information from JavaScript code. This can be done by using a variety of tools and techniques.</ul>
+    <br>
+    <ul><span class="colorb">Extract JS Files</span> <i class="fas fa-arrow-right"></i> Firstly, You have to extract javascript files from the website. Tools that can help you are <a target="_blank" href="https://github.com/003random/getJS"><span class="colord">GetJS</span></a>, <a target="_blank" href="https://github.com/projectdiscovery/katana"><span class="colord">Katana</span></a>.</ul> 
+ <pre class="prettyprint">
+getJS --complete --url https://target.com > javascript.txt
+katana -u https://target.com -d 2 -jc | grep -i ".js$" | uniq > js.txt</pre>
+ <ul><span class="colorb">Making it readable</span> <i class="fas fa-arrow-right"></i> Secondly, You need to make it readable so if you manually review code so you understand it. Here <a target="_blank" href="https://beautifier.io/"><span class="colord">beautifier</span></a></ul> 
+ <br>   
+ <ul><span class="colorb">Extract Information</span> <i class="fas fa-arrow-right"></i> If you don't manually review code so no need to beautify javascript files. Now, you need to extract information using <a target="_blank" href="https://github.com/m4ll0k/SecretFinder"><span class="colord">Secretfinder</span></a>, <a target="_blank" href="https://github.com/GerbenJavado/LinkFinder"><span class="colord">Linkfinder</span></a>.</ul> 
+ <pre class="prettyprint">
+ cat js.txt | while read url; do python3 linkfinder.py -i $url -o cli >> secret.txt; done
+ cat js.txt | while read url; do python3 SecretFinder.py -i $url -o cli >> secret.txt; done</pre>
+ <ul><span class="colorb">Shell script</span> <i class="fas fa-arrow-right"></i> <a target="_blank" href="https://github.com/KathanP19/JSFScan.sh"><span class="colord">JSFScan.sh</span></a> is a bash script that is capable to perform all things, but you should also use manual approach and use different tools and not just depend on one tool.</ul> 
+ <pre class="prettyprint" id="fuzz">
+ ./JSFScan.sh -l target.txt --all
+</pre>
+<ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> This above ones are just basic js recon methodology. You can also use other tools and techniques.</ul> 
+   <br>
+   <h3 class="headerd">3. <span>Fuzzing Target</span></h3>
+  <ul>Fuzzing is a technique used to find security vulnerabilities in websites by providing invalid, unexpected, or malformed data to the website and observing the results. Fuzzing can be used to find information disclosure vulnerabilities, which occur when sensitive information is unintentionally exposed to users or attackers.</ul> 
+      <br>
+      <ul><a target="_blank" href="https://github.com/ffuf/ffuf"><span class="colord">FFUF</span></a> <i class="fas fa-arrow-right"></i> It is also a command-line tool that can be used to fuzz web applications. It is faster than wfuzz.</ul> 
+  <pre class="prettyprint">
+    ffuf -u http://example.com/FUZZ/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</pre>
+    <ul><a target="_blank" href="https://github.com/xmendez/wfuzz"><span class="colord">wfuzz</span></a> <i class="fas fa-arrow-right"></i> wfuzz is a similar tool to ffuf. Wfuzz is a command-line tool that can be used to fuzz web applications. It can be used to find security vulnerabilities</ul> 
+  <pre class="prettyprint" id="webarchive">
+    wfuzz -w wordlist/general/common.txt --hc 404 http://example.com/FUZZ</pre>
+  <br>
+  <h3 class="headerc">5. <span class="colorc"> Web Archive</span> <span>- Wayback Machines</span></h3>
+<ul><a target="_blank" href="https://web.archive.org/"><span class="colord">Web Archiving</span></a> can help in sensitive data exposure and information disclosure by providing a <span class="colord">historical records</span> of the web that can be used to <span class="colord">track changes</span> over time.</ul>
+<br>
+<ul>Attacker can use web archive to see sensitive information which maybe removed from current website but present in old website like credentials, backup files, config files, etc.</ul>
+<br>
+<ul><span class="colorb">Manual Approach</span> <i class="fas fa-arrow-right"></i> Use website manaully and put urls like https://target.com or its files or directories that is not found in present but maybe present in old time like https://example.com/robots.txt, https://example.com/.git, https://example.com/wp-config.php, etc.</ul> 
+<br>
+<ul><span class="colorb">Automatic Approach</span> <i class="fas fa-arrow-right"></i> You can also use the tools to save your time, but remember that manual approach is much and more effective in some cases. Some tools that may help are <a target="_blank" href="https://github.com/tomnomnom/waybackurls"><span class="colord">waybackurls</span></a>, <a target="_blank" href="https://github.com/projectdiscovery/katana"><span class="colord">katana</span></a> and <a target="_blank" href="https://github.com/lc/gau"><span class="colord">gau</span></a>.</ul>
+<br>
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/ts1tu1BiSuY?si=aB8nKH7GxL5xUADh" frameborder="0" allowfullscreen></iframe>
+</div>
+  <br id="fix">   
+  <br>
+  <br>
+  <h3 class="headerc">6. <span class="colorc"> Mitigation</span> <span>Practices</span></h3>
+    <br>
+  <ul>Implementing Robust Mitigation Techniques for Sensitive Data Exposure</ul>
+      <br>
+    <ol class="list">
+         <li><span class="colora">Data Classification and Encryption</span> <i class="fas fa-arrow-right"></i> Classify data and encrypt it in transit and at rest to protect sensitive information. Use HTTPS instead of HTTP.
+        </li>
+          <br>
+          <li><span class="colora">Access Controls</span> <i class="fas fa-arrow-right"></i> Implement strict access controls to limit data access to authorized users and roles.</li>
+           <br>
+          <li><span class="colora">Secure Coding Practices</span> <i class="fas fa-arrow-right"></i> Follow secure coding practices to prevent common vulnerabilities that could lead to data exposure or cryptographic weaknesses.
+          </li>
+            <br>
+            <li><span class="colora">Key Management</span> <i class="fas fa-arrow-right"></i>  Implement strong key management practices for secure encryption and cryptographic operations.
+            </li>
+            <br>
+            <li><span class="colora">Data Masking/Redaction</span> <i class="fas fa-arrow-right"></i> Mask or redact sensitive data in non-production environments to reduce exposure during development and testing.</li>
+            <br>
+            <li><span class="colora">Regular Updates and Patching</span> <i class="fas fa-arrow-right"></i> Keep software components, cryptographic libraries, and systems up-to-date with the latest security patches.</li>
+            <br>
+            <li><span class="colora">web application firewall</span> <i class="fas fa-arrow-right"></i> A WAF can help to block attacks that attempt to exploit vulnerabilities in web applications.</li>
+            <br>
+            <li><span class="colora">Monitoring and Alerts</span> <i class="fas fa-arrow-right"></i> Implement monitoring and alerting systems to detect and respond to suspicious cryptographic activities and data exposure.</li>
+            </ol>
+          <br id="reference">
+          <br>
+          <br>
+          <h3 class="headerc">7. <span>Reference </span><span class="colorc">Reports</span></h3>
+          <br>
+          <ul>This is an report about a sensitive information through google dorking. </ul>
+          <a target="_blank" href="https://hackerone.com/reports/1210043"><span class="color">Report 1</span></a>
+          <br>
+          <br>
+          <ul>This is an article about a security researcher who found sensitive information in a public GitHub repository.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/397527"><span class="color">Report 2</span></a>
+          <br>
+          <br>
+          <ul>This is a report about information exposure through directory listing. It discusses the risks of exposing a directory listing.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/1316412"><span class="color">Report 3</span></a>
+          <br>
+          <br>
+          <ul>The report details an application error message that may disclose sensitive information. </ul>
+          <a target="_blank" href="https://hackerone.com/reports/106384"><span class="color">Report 4</span></a>
+          <br>
+          <br>
+          <ul>In this report stack trace error is shown with sensitive information.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/147577"><span class="color">Report 5</span></a>
+          <br>
+          <br>
+          <ul>The verbose SQL error with sensitive information is shown on page.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/20279"><span class="color">Report 6</span></a>
+          <br>
+          <br>
+          <ul> The vulnerability allowed an attacker to view private source code and configuration files. </ul>
+          <a target="_blank" href="https://hackerone.com/reports/248693"><span class="color">Report 7</span></a>
+          <br>
+          <br>
+          <ul>This is a report about a vulnerability in the wayback machine that allowed users' private notes to be disclosed.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/1070081"><span class="color">Report 8</span></a>
+          <br>
+          <br>
+          <ul>This is an article about a security vulnerability report. The report details a vulnerability that could allow an attacker to gain access to sensitive information.</ul>
+          <a target="_blank" href="https://hackerone.com/reports/1397788"><span class="color">Report 9</span></a>
+          <br>
+          <br>
+        <h3 class="headerc">8. <span>Solve </span><span class="colorc">Labs/Machines</span></h3>
+        <br>
+          <ul><span class="colord">Metasploitable 2</span> is a virtual environment that contains intentionally <span class="colord">sensitive information</span>, making it an ideal platform for practicing and <span class="colord">improving skills</span> in identifying and <span class="colord">mitigating</span> security weaknesses.</ul>
+          <a target="_blank" href="https://www.vulnhub.com/entry/metasploitable-2,29/"><span class="color">Lab 1</span></a>
+          <br>
+          <br>
+          <ul><span class="colord">Portswigger's</span> Information Disclosure labs are a series of interactive exercises that <span class="colord">teach</span> you how to find and exploit <span class="colord">information disclosure</span> vulnerabilities. </ul>
+          <a target="_blank" href="https://portswigger.net/web-security/all-labs#information-disclosure"><span class="color">Lab 2</span></a>
+          <br>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>help@scriptjacker.in</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:help@scriptjacker.in" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2023 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>
