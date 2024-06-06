@@ -810,3 +810,33 @@ form .button-area {
     margin-right: 0; /* Reset margin for stacked layout */
   }
 }
+
+/* hyperlink injection bypass page*/
+.imagedup {
+  text-align: center;
+  flex: 1 1 35rem;
+}
+.imagedup img {
+  margin: 3rem;
+  width: 45rem;
+  height: auto;
+  border-radius: 5%;
+  box-shadow: 0 2.5px 5px rgba(66, 65, 65, 0.6);
+  mix-blend-mode: normal;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.imagedup img:hover {
+  mix-blend-mode: normal;
+}
+
+@media(max-width:600px){
+  .imagedup {
+    margin-top: 2rem;
+  }
+  .imagedup img {
+    margin: 0 auto;
+    width: 80%;
+    mix-blend-mode: normal;
+  }
+}
