@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-png">
+    <title>Hyperlink Injection Bypass | ScriptJacker | Blogs</title>
+</head>
+<body oncontextmenu="return false">
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    
+    <li><a href="#mail">1. Mail Clients Behavior</a></li>
+    <li><a href="#hyper">2. Hyperlink Inj Protection</a></li>
+    <li><a href="#reference">3. Bypass Technique</a></li>
+    <li><a href="#conc">4. Conclusion</a></li> 
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../">Home</a></li>
+          <li><a href="../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../../research/owasp/">Owasp</a></li>
+                 <li><a href="../../research/recon/">Recon</a></li>
+                <li><a href="../../research/bash/">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../contact">Contact</a></li>
+            <li><a href="../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content">
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-link"></i> Hyperlink Injection <span>Bypass</span></h3>
+          <br>
+          <br>
+          <ol class="list">
+            <ul>Hey Hackers <i class="fas fa-user-secret"></i> ,</ul>
+            <ul>My name is <a target="_blank" href="https://www.linkedin.com/in/parth-narula-86283821a/"><span class="color">Parth Narula</span></a>,
+              and I'm excited to share some research I've done on hyperlink injection bypass method.
+              <br>
+              <br id="mail">
+              We're all familiar with standard hyperlink injection,
+
+              where attackers embed malicious links in input fields. Today, I want to discuss a different technique I've discovered.
+             
+             This article explores a bypass method for hyperlink injection that I identified through my research.</ul>
+             <ul>I hope you find this information valuable!</ul>
+            <br>
+            <h3 class="headerc">1. <span>Different Mail Clients Behaviors</span></h3>
+            <ul>Email clients handle hyperlink injection differently because of variations in their security measures. These measures involve how they validate user-entered data on both the user's device (client-side) and the email server (server-side). This validation determines whether the text is converted into a clickable link. Additionally, some email clients might consider the behavior of other email clients when handling potential threats.</ul>
+            <br>
+            <h3 class="headerd">1. <span>Gmail</span></h3>
+            <ul>Let's take a closer look at Gmail, one of the most popular email clients. Interestingly, Gmail treats these four variations of "evil.com" differently when displaying them as hyperlinks:
+              <br>
+              <br>
+              evil.com and Evil.Co.In: These appear as clickable links.
+              <br>
+              Evil.com and Evil.Com: These remain as plain text, not clickable.
+              <br>
+            </ul> 
+            <br>
+            <ul><span class="colorb">Interesting</span> <i class="fas fa-arrow-right"></i> This behavior might seem puzzling, but it's likely due to Gmail's specific algorithms for link detection. While the exact reasons are not publicly known, it could be related to factors like:</b></ul> 
+              <ul>Gmail depends on case sensitivity thats why it convert evil.com in hyperlink and not convert Evil.com and Evil.Com in link, but you guys now would ask what about Evil.Co.In as its also Uppercase so it shouldn't be converted into hyperlink but it get converted because maybe Gmail only put proper validation checks upto one period domain like evil.com and not evil.co.in so, In todays article we are going to exploit this flaw or configuration done my gmail.</ul>
+              <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/d3.jpg" alt="">
+          </div>
+             <br>
+            <br>
+          <br>
+            <h3 class="headerd">2. <span>Whatsapp behavior</span></h3>
+            <ul>While WhatsApp isn't an email client,
+              it's worth noting that it also exhibits variations in how hyperlinks are displayed across different devices like iOS, Android, and WhatsApp Web. This variation could be due to differences in how WhatsApp implements security measures on each platform.</ul>
+            <br>
+            <ul><span class="colorb">Whatsapp Web</span> <i class="fas fa-arrow-right"></i> In WhatsApp Web these all four evil.com, Evil.com, Evil.Com, Evil.Co.In will appear to be a hyperlink let me tell you why.
+              <br> It is because whatsapp treat a text with . (dot/period) as url but only if it is entered with correct TLD (.com,.co,.xyz) Like evil.xyy will not appear as hyperlink in whatsapp web as it contains a period but not correct TLD and on the other hand evil.xyz will be treated as link as it full fills both the conditions i.e text must contain one or more than one period and correct TLD and doesn't matter its uppercase or lowercase. <b>In outlook it also shows behavior like whatsapp web.</b></ul> 
+              <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/d5.jpg" alt="">
+              <img draggable="true" class="tilt" src="../../assets/images/d1.jpg" alt="">
+            </div>
+              <br>
+            <br>
+            <ul><span class="colorb">Whatsapp Android</span> <i class="fas fa-arrow-right"></i> In Android App these two evil.com, Evil.com appear to be a hyperlink but not these Evil.Com, Evil.Co.In
+              <br> It is because now, here whatsapp put more strict restrictions as it convert text into link with valid TLD and also with lowercase TLD with a period. Like Evil.com, evil.com, EVIL.com, Evil.Co.in will be appear as hyperlink as it fullfil all three conditions i.e contains one or more period, correct TLD and TLD is in lowercase (.com) here it doesn't matter that text before period is uppercase or lowercase but Evil.Com or Evil.Co.In will not be appear as hyperlink because it fullfil two conditions but not fullfil that TLD should be lowercase.</ul> 
+              <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/d4.jpg" alt="">
+              </div>
+              <br>
+              <br>
+              <ul><span class="colorb">Whatsapp IOS</span> <i class="fas fa-arrow-right"></i> In IOS Application these three evil.com, Evil.com, Evil.Com will appear as hyperlink and this Evil.Co.In will not appear as hyperlink let me tell you why.
+                <br> It is because now, here whatsapp in IOS is designed differently. It doesn't think that TLD should be lowercase or but according to me now its think that domain with double TLD should have second TLD lowercase like Evil.Co.in and not Evil.Co.In as it doesn't care about domains with single period so thats why it converts these evil.com, Evil.com and Evil.Com in hyperlink.</ul> 
+                <div class="imagedup">
+                  <img draggable="true" class="tilt" src="../../assets/images/d7.jpg" alt="">
+              </div>
+                <br>
+                <br>
+            <h3 class="headerd">3. <span>TempMail</span></h3>
+            <ul><a target="_blank" href="https://temp-mail.org/en/"><span class="color">TempMail</span></a>, a popular service for generating temporary email addresses for people like us, handles hyperlinks in a unique way compared to traditional email clients like Gmail or Outlook. Instead of relying on its own internal processing, TempMail displays hyperlinks based on how the sender's email client interprets them.
+             <br>
+             In simpler terms, if you send an email from Gmail to a TempMail address, and the text appears as a clickable link in Gmail, it will also appear as a link in TempMail. Conversely, if the text shows as plain text in Gmail, it will remain as text in TempMail. <b>By default according to me it treat everything as text.</b></ul> 
+             <br>
+             <ul><span class="colorb">Note</span> <i class="fas fa-arrow-right"></i> You guys have must seen this kind of behavior that it don't show evil.com as hyperlink when you are trying to find hyperlink injection because the website email client like no-reply@website.com also treat evil.com as text. <b>Proton Mail also show quite same behavior as TempMail.</b></ul> 
+             <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/d6.jpg" alt="">
+             <img draggable="true" class="tilt" src="../../assets/images/d2.jpg" alt="">
+             </div>
+             <br id="hyper">
+          <br>
+          <br>
+          <h3 class="headerc">2. <span>Hyperlink Injection Protection</span></h3>
+            <ul>We've seen how email clients handle links in different ways.
+             Now, let's explore how websites themselves fight back against hyperlink injection. Different websites put different kind 
+              of techniques to protect from hyperlink injection. Like some don't allow the use of  "https://" and some convert the 
+              link into uppercase so it appear to be text or some don't allow use of periods/dot (.) or some escape these things and 
+              many more techniques used by different websites.
+            <br>
+            <br>
+            Attackers might try injecting malicious links like "evil.com" into input fields that get reflected back in emails. However, websites employ various protection or escaping techniques to prevent such attempts from succeeding. Like it convert evil.com to the followings listed below so that it appear as text only in email:-
+            </ul>
+              <br>
+            <ol class="list">
+              <li><span class="colora">Evil.com</span> <i class="fas fa-arrow-right"></i> evil.com get converted to Evil.com where the domain name starts with UPPERCASE letter "E".</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/d9.jpg" alt="">
+                </div>
+              <br>
+              <li><span class="colora">Evil.Com</span> <i class="fas fa-arrow-right"></i> Here every word which starts after a period/dot get UPPERCASE i.e "E" and "C".</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/d8.jpg" alt="">
+                </div>
+              <br>
+              <li><span class="colora">evil com</span> <i class="fas fa-arrow-right"></i> Websites escapes the period/dot (.) so that it appear as text only.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/d10.jpg" alt="">
+                </div>
+              <br>
+              <li><span class="colora">evil. com</span> <i class="fas fa-arrow-right"></i> There is space after period/dot (.) o that it don't appear as link.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/d12.jpg" alt="">
+                </div>
+              <br>
+              <li><span class="colora">evilcom</span> <i class="fas fa-arrow-right"></i> Here also it escapes period/dot (.) but give no space between letters.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/d11.jpg" alt="">
+                </div>
+              <br>
+              <li><span class="colora">Not accept period/dot (.)</span> <i class="fas fa-arrow-right"></i> Directly website deny that period/dot symbol (.) is not accepted and only texts are allowed.</li>
+              <br>
+              <li><span class="colora">Not accept https://</span> <i class="fas fa-arrow-right"></i> Simply not accept http:// or https:// but here it can be easily bypassed by just entering evil.com.</li>
+              <br>
+              <li><span class="colora">Whitelisting trusted domains</span> <i class="fas fa-arrow-right"></i> Only allow trusted domains of company like google.com, bing.com, etc.</li>
+              <br>
+              <li><span class="colora">Other Methods</span> <i class="fas fa-arrow-right"></i> It may use any other methods.</li>
+              </ol>
+          <br id="reference">
+          <br>
+          <br>
+          <h3 class="headerc">3. <span>Bypassing Hyperlink Protection</span></h3>
+          <ul>In this article We will <b>only</b> look to bypass the protection method used by companies told in 1st and 2nd point above i.e Evil.com and Evil.Com
+          <br> You know about the different mailing clients behavior so this would be easy to understand. I have perform this bypass technique or misconfiguration in GMAIL.
+          </ul>
+          <ul>
+            <br>
+            evil.com and Evil.Co.In: These appear as clickable links.
+            <br>
+            Evil.com and Evil.Com: These remain as plain text, not clickable.
+            <br>
+            <br>
+            We can use a simple thing that add a double period/dot link ( like: evil.com.in, bbc.co.uk ) rather then single period/dot domain ( like: evil.com, scriptjacker.in ) into the input field that is reflected back when receiving email (like: name field).
+          </ul> 
+          <br>
+          <ul>Now, You guys will think what's this, but YES guys this a small flaw which will allow you to bypass hyperlink protection. As you know that Evil.com and Evil.Com doesn't appear as link in gmail because of websites escaping or protection technique but if we put double period domain bbc.co.uk so it will appear as link in gmail even if website converts it into UPPERCASE like Evil.Co.Uk, EVIL.CO.UK, Evil.co.uk, Evil.Co.uk, etc so also it will appear as hyperlink.
+            <br>
+            <br>
+            Hence, the 1st and 2nd escaping technique is 100% successfully bypassed in GMAIL. You can see some PoC's below:-
+          </ul>
+          <div class="imagedup">
+            <img draggable="true" class="tilt" src="../../assets/images/d14.jpg" alt="">
+          </div>
+          <br>
+          <div class="imagedup">
+            <img draggable="true" class="tilt" src="../../assets/images/d13.jpg" alt="">
+            <img draggable="true" class="tilt" src="../../assets/images/d16.jpg" alt="">
+          </div>
+          <br>
+          <div class="imagedup">
+            <img draggable="true" class="tilt" src="../../assets/images/d17.jpg" alt="">
+            <img draggable="true" class="tilt" src="../../assets/images/d15.jpg" alt="">
+          </div>
+        <br  id="conc">
+        <br>
+        <h3 class="headerc">4. <span>Conclusion</span></h3>
+        <br>
+          <ul>So mates, I hope you had learnt something new after reading this article. You can share your views in my <a target="_blank" href="https://scriptjacker.in/contact/"><span class="color">Contact Page</span></a> and If you guys also want to become a author of a article so also you can email me or fill contact form and I will post your article here with your name, Only if the topic is interesting :&#41; </ul>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>scriptjacker@gmail.com</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:scriptjacker@gmail.com" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2024 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>
