@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-png">
+    <title>Business Logic Vulnerability | ScriptJacker | Blogs</title>
+</head>
+<body oncontextmenu="return false">
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    
+    <li><a href="#web">1. Website Functionality Check</a></li>
+    <li><a href="#sub">2. Subdomains Behavior</a></li>
+    <li><a href="#flaw">3. Discovery of Flaw</a></li>
+    <li><a href="#step">4. Steps to Reproduce </a></li> 
+    <li><a href="#reason">5 Reasons </a></li> 
+    <li><a href="#conc">6. Conclusion </a></li>
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../">Home</a></li>
+          <li><a href="../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../../research/owasp/">Owasp</a></li>
+                 <li><a href="../../research/recon/">Recon</a></li>
+                <li><a href="../../research/bash/">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../contact">Contact</a></li>
+            <li><a href="../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content">
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-link"></i> <span>Business Logic</span> Vulnerability</h3>
+          <br>
+          <br>
+          <ol class="list">
+            <ul>Hey Hackers <i class="fas fa-user-secret"></i> ,</ul>
+            <ul>My name is <a target="_blank" href="https://www.linkedin.com/in/parth-narula-86283821a/"><span class="color">Parth Narula</span></a>,
+              and I'm excited to share one different kind of business logic bug! This bug is literally very very rare and maybe you can find this once in a lifetime. 99.99% people don't know about this business logic security misconfiguration :&#41;
+              <br id="web">
+              <br>
+            <br>
+            <h3 class="headerc">1. <span>Website Functionality Check (Scrolling)</span></h3>
+            <ul>&#x2022; In starting I was just normally scrolling website <span class="colord">danacita.co.id</span> and I came to the two subdomains i.e <span class="colord">app.danacita.co.id</span> & <span class="colord">partners.danacita.co.id</span> </ul>
+            <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/pic2.jpg" alt="">
+      
+              <img draggable="true" class="tilt" src="../../assets/images/pic1.jpg" alt="">
+            </div>
+            <br>
+            <h3 class="headerd">1. <span>app.danacita.co.id subdomain</span></h3>
+            <ul>This subdomain was having both login and register page at:
+              <br>
+              <br>
+              &#x2022 Login Page: https://app.danacita.co.id/login
+              <ul><span class="colorb">Note</span> <i class="fas fa-arrow-right"></i> In login page the input fields were only phone no. (Only Indonesian no. allowed) and password. </b></ul> 
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic2.jpg" alt="">
+              </div>
+              <br>
+              &#x2022 Register Page: https://app.danacita.co.id/register
+              <ul><span class="colorb">Note</span> <i class="fas fa-arrow-right"></i> In register page input fields were email address, Phone no. (Only Indonesian no. allowed), Institution and Password. </b></ul> 
+            </ul> 
+            <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/pic3.jpg" alt="">
+            </div>
+            <br>
+          <br>
+            <h3 class="headerd">2. <span>partners.danacita.co.id subdomain</span></h3>
+            <ul>This subdomain was only having login page and no register page but there was option for forgot password as usual in all the websites.
+              <br>
+              <br>
+              &#x2022 Login Page: https://partners.danacita.co.id/login
+              <ul><span class="colorb">Note</span> <i class="fas fa-arrow-right"></i> In login page the input fields were only email and password. </b></ul> 
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic1.jpg" alt="">
+              </div>
+              <br>
+              &#x2022 Forgot Password Page: https://partners.danacita.co.id/forgot_password
+              <ul><span class="colorb">Note</span> <i class="fas fa-arrow-right"></i> In the forgot password page the input field was only email. </b></ul> 
+            </ul> 
+            <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/pic4.jpg" alt="" id="sub">
+            </div>
+            <br>              
+            </ul>
+            <br>
+            <h3 class="headerc">2. <span>Behavior of both Subdomains</span></h3>
+            <ul>&#x2022 Now, We will be analyzing input field behavior across login, registration, and password recovery page.</ul>
+            <br>
+            <h3 class="headerd">1. <span>app.danacita.co.id subdomain</span></h3>
+            <ul>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic3.jpg" alt="">
+              </div>
+              &#x2022 Register Page: https://app.danacita.co.id/register
+              <ul>&#x2022 As I said earlier there was mainly email, phone and password field for authentication.</ul>
+              <br>
+              <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> If A user enter the email, phone (only indonesian no.) and fill password field.
+                <br>
+                Then the user will be redirected to a otp screen page. In that page the website send OTP to the phone no. only and <b>not to email then we entered previously in our registration page.</b> 
+                You know that we wasn't able to enter other then indonesian no. and that's how we was not able to completely create and enter into account and just stuck on OTP screen.
+            You will only get in account if you entered correct OTP, But I failed several times and wasn't able to enter into account.
+            <br>
+            <div class="imagedup">
+              <img draggable="true" class="tilt" src="../../assets/images/pic5.jpg" alt="">
+            </div>
+            &#x2022 You guys would be probably thinking that what's the use of email if the OTP was't send on that email and was only send to phone no. Will let you know...
+              </b></ul> 
+              <br>
+              &#x2022 Login Page: https://app.danacita.co.id/login
+              <ul>&#x2022 In login page there was only phone no. and password for authentication that we previously entered in register page.</ul>
+              <br>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic2.jpg" alt="">
+              </div>
+              <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> You know that we entered email, phone and password in register 
+                page but then we get redirected to OTP screen and OTP was only send to phone no. and there was no use of email and 
+                password at that time because Passing the otp screen by entering correct OTP was most important to create account.</b></ul> 
+                Just for eg. Suppose you entered correct OTP and then you automatically redirected to login screen. There was option for entering phone no, and password to get into 
+                account and you noticed that still there was not use of email the we earlier entered in the register page. This thing was the red flag.
+              <br>
+            </ul> 
+            <br>
+          <br>
+            <h3 class="headerd">2. <span>partners.danacita.co.id subdomain</span></h3>
+            <ul>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic1.jpg" alt="">
+              </div>
+              &#x2022 Login Page: https://partners.danacita.co.id/login
+              <ul>&#x2022 As I said before that there was only login page and no registration page and only already authenticated users (Users whose account was already created/exist) with correct email
+                and password was able to get logged into account on this subdomain.
+              </ul>
+              <br>
+              <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> There was no page for registration or creating a new account like 
+                in app.danacita.co.id so new users wasn't able to enter into partners.danacita.co.id.</b></ul>
+                <ul>I thought that maybe the email and password that I entered in register page of app.danacita.co.id may work. 
+                  I entered the email and password but not get logged in this subdomain. <b>Maybe this an be the reason that our account was not fully created in app.danacita.co.id 
+                  as we got stuck on OTP screen.</b>
+                </ul> 
+              <br>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic4.jpg" alt="">
+              </div>
+              &#x2022 Forgot Password Page: https://partners.danacita.co.id/forgot_password
+              <ul>&#x2022 So this was just a normal forgot password page in which we can ask for password reset token by entering our email in input field. 
+              </ul>
+              <BR>
+              <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> I think that in our app.danacita.co.id subdomain the phone no. was playing main role to authenticate in
+              account and in this subdomain email is playing main role and there was no asking of phone no. in this subdomain. This thing strike my mind.</b></ul>
+              <ul>I thought maybe the email that was useless in app.danacita.co.id subdomain get used in this subdomain to get authenticated. 
+                But how that's possible because there was no register page and only login page (means only authenticated users were allowed) and our account was 
+                not fully created in previous subdomain so our email not get stored in database and can't be used as already existing or authenticated user.
+              </ul>
+      
+            </ul> 
+            <br>      
+            <ul id="flaw"><span class="colora">Understanding</span> <i class="fas fa-arrow-right"></i> Now, let me make it clear that It was not possible to somehow bypass login/register page of app.danacita.co.id. So, I 
+              shifted my attention to partners.danacita.co.id to somehow find a flaw and get into that subdomain without fully getting registered in app.danacita.co.id and also not providing credentials for already existing user as I was not having that. <br>
+            Cause there was use of email in this subdomain so maybe it can be somewhat possible to find a broken logic into this or previous subdomain to access this (partners.danacita.co.id). </ul>         
+            </ul>
+            <br>
+            <h3 class="headerc">3. <span>Discovery of Broken Logic</span></h3>
+            <ul>&#x2022; Now, Behaviors about these two subdomain would be much clear to you. This section is the core part 
+              of this Article so If you still don't understand the working of subdomains so again read above sections.</ul>
+            <br>
+            <h3 class="headerd">1. <span>app.danacita.co.id subdomain</span></h3>
+            <ul>
+              <br>
+              &#x2022 Register Page: https://app.danacita.co.id/register
+              <ul>&#x2022 I entered email, phone no. and password in this page and get into OTP screen. You know its important to enter correct OTP 
+                to get into account and there was no use of email in this subdomain.
+              <br>
+              I think that when I entered the email, phone and password and get redirected to OTP screen then our half registration is completed. Right? So, maybe website has stored 
+              our all details (email, phone & password) or few details (email & password) in its DATABASE, when we get redirected to OTP screen.
+              </ul>
+              <br>
+              &#x2022 Login Page: https://app.danacita.co.id/login
+              <ul>&#x2022 There was option for phone and password to get logged in and no use of email. I was stuck till OTP screen only.</ul>
+              As I told you that maybe all the details (email, phone and password) was stored on DB when I get on OTP screen. To test this I went to login page when 
+              I get redirected to OTP screen without entering correct OTP by assumption that maybe my details get stored in DB when half registration is completed. 
+              In login page I entered phone and password without fully creating account and LOL I was not successful! Hmm...Still I was having hope that maybe my email get stored in DB if phone and password 
+              is not stored.
+              <br>
+              <br>
+              <ul><span class="colorb">Keep In Mind</span> <i class="fas fa-arrow-right"></i> How I can test that email is stored or not in DB when our half registration is completed 
+                (means we get on OTP screen), cause there was no option to enter email in this subdomain login page. So, I think that partners.danacita.co.id was having email option 
+              in login page.</b></ul>
+        </ul>
+              
+              <br>
+            </ul> 
+            
+          <br>
+            <h3 class="headerd">2. <span>partners.danacita.co.id subdomain</span></h3>
+            <ul>
+              <br>
+              &#x2022 Login Page: https://partners.danacita.co.id/login
+              <ul>&#x2022 So, I think maybe DB of both the subdomains are connected to each other and I can test whether my email is stored or not in DB. So, 
+                I entered the email and password that I entered in registration page of app.danacita.co.id by the assumptions that my email was stored in DB cause 
+                my phone no. was not stored as I check that n our above paragraph. My last hope was email.
+                <br>
+                Still I was not able to enter into partners.danacita.co.id by entering the email and password. Now I give last try to forgot password page of 
+                this subdomain.
+              </ul>
+              <br>
+
+              <br>
+              &#x2022 Forgot Password Page: https://partners.danacita.co.id/forgot_password
+              <ul>&#x2022 So, I entered the email here also to check whether my email is really stored in DB or not.
+                <br>
+                Boom!!! I received a password reset token on my that email and I was able to reset password and get into partners.danacita.co.id subdomain without fully creating an account on app.danacita.co.id and also by not providing 
+                credentials (email & password) of already existing user in partners.danacita.co.id.
+              </ul>
+              <BR>
+              <ul><span class="colorb">Important</span> <i class="fas fa-arrow-right"></i> So, I was right that my few details (email) get stored in DB when we complete our half registration process i.e to get redirected on OTP screen and also my 
+              this assumption was true that DB of both the subdomains are connected or same.</b></ul>
+              <br id="step">
+              <br>
+              <br>
+          <h3 class="headerc">4. <span>Steps To Reproduce</span></h3>
+              <br>
+            <ol class="list">
+              <li><span class="colora">Step</span> <i class="fas fa-arrow-right"></i> Visit https://app.danacita.co.id/register and enter email, random phone no. and random password. You will be then redirected to OTP screen.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic3.jpg" alt="">
+                <img draggable="true" class="tilt" src="../../assets/images/pic5.jpg" alt="">
+              </div>
+              <br>
+              <li><span class="colora">Step</span> <i class="fas fa-arrow-right"></i> Don't enter any OTP, exit that screen and directly visit https://partners.danacita.co.id/forgot_password</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic4.jpg" alt="">
+                </div>
+              <br>
+              <li><span class="colora">Step</span> <i class="fas fa-arrow-right"></i> Now, enter the email in forgot password page that you previously entered in registration page https://app.danacita.co.id/register </li>
+                <br>
+                <li><span class="colora">Step</span> <i class="fas fa-arrow-right"></i> You will receive a password reset token to change/add password for that email and to gain access into partners.danacita.co.id subdomain i.e https://partners.danacita.co.id/set_password?key=R5Z6jHJ83094</li>
+                <div class="imagedup">
+                  <img draggable="true" class="tilt" src="../../assets/images/pic8.jpg" alt="">
+                  <img draggable="true" class="tilt" src="../../assets/images/pic7.jpg" alt="">
+                </div>
+                <br>
+                <li><span class="colora">Step</span> <i class="fas fa-arrow-right"></i> You have't created account in (app) AND (partners) subdomain, but still you were able o enter into partners.danacita.co.id subdomain.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/pic6.jpg" alt="">
+                </div>
+              </ol>
+          <br id="reason">
+          <br>
+          <br>
+          <h3 class="headerc">5. <span>Reasons - Why this happened ?</span></h3>
+          <ul>There were mainly two reasons for happening of this very cool vulnerability:
+            <br>
+            &#x2022 The website was storing our details (email) into there DB even when our account is not fully created. It was storing email into DB when we redirected to 
+            OTP screen. But, This approach was totally wrong and it should only store details when our account is fully created and not when our account is not created or half created.
+          <br>
+          <BR>
+          &#x2022 Databases of both the subdomains are connected. This is not a bad approach to connect DB or use same DB for multiple subdomains. But, 
+          as our email of app.danacita.co.id was stored in that DB before fully creation of account and If we ask for password reset 
+          of that email so partners.danacita.co.id check that whether this is stored or not. Due to this flaw it get stored and it think this user already exists and send 
+          us a password reset token to get into the account.
+          </ul>
+        
+        <br id="conc">
+        <br>
+        <h3 class="headerc">4. <span>Conclusion</span></h3>
+        <br>
+          <ul>So mates, I hope you had learnt something new after reading this article. You can share your views in my <a target="_blank" href="https://scriptjacker.in/contact/"><span class="color">Contact Page</span></a> and If you guys also want to become a author of a article so also you can email me or fill contact form and I will post your article here with your name, Only if the topic is interesting :&#41; </ul>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Blogs</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>scriptjacker@gmail.com</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:scriptjacker@gmail.com" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2024 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>
