@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-png">
+    <title>owasp | ScriptJacker | bug hunting | web pen testing</title>
+</head>
+<body oncontextmenu="return false">
+
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    
+    <li><a href="#sm">1. Security Misconfiguration</a></li>
+    <li><a href="#sde">2. Sensitive Data Exposure</a></li>
+    <li><a href="#vul">3. Vulnerable & Outdated Components</a></li>
+
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../">Home</a></li>
+          <li><a href="../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="">Owasp</a></li>
+                 <li><a href="../recon">Recon</a></li>
+                <li><a href="../bash">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../../contact">Contact</a></li>
+            <li><a href="../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content" >
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-search"></i> Research On <span>OWASP</span></h3>
+          <br>
+          <div class="owasp-image">
+              <img src="../../assets/images/owasp.jpg" alt="Recon Methodology">
+        </div> 
+        <br>
+          <pre class="prettyprint">In this page we have done research on 'OWASP vulnerabilities' and bring tips and tricks in which most of the cases are covered and list will be get updated on regular basis. If you wanted to 'contribute' and want to add something into tips that we have not added or missed so you can visit the 'contact page' and submit your messege or reach to our email or contact number. We will update the list with your 'name as author'. Some vulnerabilities or tricks can be repeated it can come in many categories. You guys can also provide your research work and we will mention that in our website with your name as author. </pre>
+          <br id="sm">
+          <br>
+          <br>
+          <ol class="list">
+            <br>
+            <h3 class="headera"> Security <span>Misconfiguration</span></h3>
+            <br>
+            <ul>Security misconfigurations encompass a broad category of cybersecurity vulnerabilities that arise from 
+              improperly configured systems, applications, or networks. These misconfigurations can manifest in various 
+              domains, including web applications, databases, cloud services, servers, and network infrastructure. 
+              Examples range from failing to disable directory listing on a web server to leaving default database 
+              credentials unchanged or exposing cloud storage without proper access controls. Consequences are severe 
+              and can lead to data breaches, unauthorized access, data manipulation, or service disruptions. Mitigation 
+              strategies involve regular configuration audits, the principle of least privilege, automated checks, timely
+               software updates, and comprehensive personnel training to ensure a robust defense against these pervasive 
+               threats.</ul>
+            <a href="./security-misconfiguration/" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="ba">
+            <br>
+            <br id="sde">
+            <br>
+            <br>
+            <h3 class="headera"> Sensitive Data <span>Exposure</span></h3>
+            <br>
+            <ul>Sensitive data exposure occurs due to inadequate encryption, weak access controls, insecure storage, 
+              improper data handling, information disclosure, and insufficient data masking. Examples include unencrypted payment data, 
+              misconfigured APIs, unprotected cloud storage, and plaintext passwords. Consequences encompass data 
+              breaches, privacy violations, identity theft, financial losses, and reputation damage. Cryptographic 
+              failures include weak encryption algorithms, improper key management, inadequate randomness, unprotected 
+              key storage, and the absence of forward secrecy. Their impacts include data compromise and financial and 
+              legal ramifications. Mitigation strategies involve strong encryption, rigorous access controls, secure 
+              storage, data masking, proper key management, and regular security audits to safeguard sensitive data, 
+              ensuring confidentiality and integrity.</ul>
+            <a href="./sensitive-data-exposure/" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br id="vul">
+            <br>
+            <br>
+            <h3 class="headera"> Vulnerable & Outdated <span>Components</span></h3>
+            <br>
+            <ul>Vulnerable and outdated components pose significant security risks, often stemming from outdated or 
+              obsolete software elements due to reasons like a lack of patch management, third-party dependencies, 
+              legacy code, and poor dependency tracking. These components, including operating systems, frameworks, 
+              libraries, and plugins, can introduce exploitable vulnerabilities, leading to potential data breaches, 
+              malware attacks, financial losses, and reputation damage. Effective mitigation strategies involve 
+              proactive patching, vigilant dependency management, continuous monitoring, risk assessment, proactive 
+              upgrade planning, secure coding practices, and rigorous security testing, all crucial to address 
+              vulnerabilities arising from outdated software components and enhance overall system security.</ul>
+            <a href="./vulnerable-outdated-components/" class="btn"><span>Read More</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>scriptjacker@gmail.com</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:help@scriptjacker.in" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2024 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>
