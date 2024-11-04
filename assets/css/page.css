@@ -671,6 +671,10 @@ form .button-area {
   background-color: #0c0a24;
   color: rgb(10, 241, 29);
 }
+.colore {
+  color: rgb(185, 185, 185);
+  font-weight: 250;
+}
 .list li {
   color: #fff;
   font-weight: 500;
