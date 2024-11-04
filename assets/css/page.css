@@ -844,3 +844,31 @@ form .button-area {
     mix-blend-mode: normal;
   }
 }
+
+/* Main container styling */
+    .code-container {
+      width: 100%; 
+      max-width: 1000px; 
+      overflow-x: auto; 
+      background-color: #2e2e2e; 
+      color: #ffffff; 
+      padding: 16px;
+      border-radius: 8px;
+      font-family: monospace; 
+      font-size: 14px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Smooth scrolling effect */
+    .code-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .code-container::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 4px;
+    }
+
+    .code-container::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
