@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/page.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link id='favicon' rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-png">
+    <title>Request Manipulation | ScriptJacker | Blogs</title>
+</head>
+<body oncontextmenu="return false">
+<!-- Sidebar (initially open) -->
+<div id="sidebar">
+  <ul>
+    
+    <li><a href="#req">1. Request Manipulation</a></li>
+    <li><a href="#info">2. It leads Info Disclosure </a></li>
+    <li><a href="#cs1">&#10551; 2.1 Case Study 1st</a></li>
+    <li><a href="#cs2">&#10551; 2.2 Case Study 2nd</a></li>
+    <li><a href="#tip">3. Tips & Techniques</a></li>
+    <li><a href="#fix">4. Mitigation</a></li>
+    <li><a href="#conc">5. Conclusion</a></li> 
+
+    <!-- Add more sidebar links here -->
+</ul>
+</div>
+
+<!-- navbar starts -->
+<header>
+    <a href="/" class="logo">ScriptJacker</a>
+
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <ul>
+           <li><a class="active" href="../../">Home</a></li>
+          <li><a href="../../about">About</a></li>
+          <li class="dropdown" id="researchDropdown">
+             <a href="#" class="dropdown-button">Research</a>
+            <ul class="dropdown-content">
+                 <li><a href="../../research/owasp/">Owasp</a></li>
+                 <li><a href="../../research/recon/">Recon</a></li>
+                <li><a href="../../research/bash/">Bash</a></li>
+            </ul>
+        </li>
+            <li><a href="../">Blogs</a></li>
+            <li><a href="../../contact">Contact</a></li>
+            <li><a href="../../projects">Projects</a></li>
+            </ul>
+        </nav>
+</header>
+
+
+<div id="main-content">
+<!-- section start -->
+<section class="page_404" id="about">
+        <div class="container">
+          
+          <div class="msg">
+            <h3 class="heading" ><i class="fas fa-link"></i> Request <span>Manipulation</span></h3>
+          <br>
+          <br>
+          <ol class="list">
+            <ul>Hey Hackers <i class="fas fa-user-secret"></i> ,</ul>
+            <ul>My name is <a target="_blank" href="https://www.linkedin.com/in/parth-narula-86283821a/"><span class="color">Parth Narula</span></a>,
+              and I'm excited to share this amazing article on Bug Hunting with Request Manipulation.
+              <br>
+              <br>
+              We're all familiar with intercepting request and response in BurpSuite,
+
+              where attackers can do lot of stuff including capturing request and response and manipulating them.
+             
+              In Today's article you guys
+              will definitely learn something new because in between I am gonna tell mind blowing things about the importance of intercepting 
+              & manipulating each and every request.</ul>
+             <ul id="req">I hope you find this information valuable!</ul>
+            <br>
+            <br>
+            <h3 class="headerc">1. <span> Request Manipulation</span></h3>
+            <ul>Okay, so let’s start with the basics. A request is what your browser sends to a server every time you click, type, 
+              or scroll around on the internet. You make a request, and the server sends back a response—simple, right? Well, not quite.  </ul>
+            <br>
+            <ul>Request manipulation is like changing the question you’re asking a server to see if it responds differently. You intercept a 
+              request, make a few changes—maybe asking for a bit more information or in a way the server isn’t expecting. Tools like Burp 
+              Suite let you catch and modify these requests in ways that aren’t possible in a regular browser. This is where things start to 
+              get interesting.</ul>
+              <br id="info">
+            <br>
+            <br>
+            <h3 class="headerc">2. <span> Request Manipulation leads Information Disclosure</span></h3>
+            <ul>Request manipulation can lead to a wide range of vulnerabilities beyond just information disclosure, 
+              including XSS, ATO, SQLi, business logic flaws, and unauthorized access. However, in many cases, information Disclosure
+               is the first vulnerability exposed, serving as a gateway to other bugs.
+            <br>
+            <br id="cs1">
+            In this article, we will specifically focus on information disclosure vulnerabilities that I discovered. In future posts, 
+            we'll explore other types of vulnerabilities uncovered through request manipulation. <i>If you also find these kind of bugs so let me know. 
+            I will add your report here with your name as credit.</i>
+            </ul>
+            <br>
+            <h3 class="headerd">i.&#41; <span>Case Study: Browser UI vs BurpSuite</span></h3>
+            <ul>So, In this report we will get to know the difference between response of UI and BurpSuite.
+            </ul>
+            <br>
+            <ul>I was working with a login page <span class="colord">https://podwalks.redacted.nl/admin/login</span> and wanted to see if changing the information I entered in the input fields (email & password) would reveal 
+              anything unexpected. So, I started by testing right in the browser UI, entering different payloads (like: ', '1'='2'--) into the email field to 
+              see if they might trigger an unusual response.</ul>
+              <br>
+              <ul><span class="colord">Browser UI</span> <i class="fas fa-arrow-right"></i> I entered various payloads directly into the input fields, trying to see if I could get any hidden information back in the response.
+                But each time, the page responded normally without revealing anything sensitive. No luck here.</ul> 
+            <br>
+            <ol class="list">
+              <li><span class="colorb">Step</span> <i class="fas fa-arrow-right"></i> Open login page and enter <span class="colord"><i>' or '1' = '1--</i></span> in email field.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/poc22.jpg" alt="">
+                <figcaption><span class="colore">In the UI response, you will see a generic error message stating, 'The email or password 
+                  provided is incorrect.' No sensitive information, additional details, or stack trace is displayed in the response.
+                </span> </figcaption>
+                </div>
+              <br>
+              </ol>
+            <ul><span class="colord">BurpSuite</span> <i class="fas fa-arrow-right"></i> Then, I tried using Burp Suite to capture and modify the same 
+              request before sending it to the server. This time, the response was different—sensitive information was exposed that hadn’t 
+              shown up through the regular UI testing.</ul> 
+              <br>
+            <ol class="list">
+              <li><span class="colorb">Step</span> <i class="fas fa-arrow-right"></i> Capture the request in BurpSuite and enter <span class="colord"><i>' or '1' = '1--</i></span> in email field.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/poc88.jpg" alt="">
+                <figcaption><span class="colore">In the response, you will see an error message that includes a stack trace, revealing 
+                  additional details about the system's internal structure. This exposure provides insights beyond the standard 'incorrect 
+                  email or password' message, potentially disclosing sensitive information useful for further analysis like for SQLi.
+                </span> </figcaption>
+                </div>
+              <br>
+              </ol>
+              <pre class="prettyprint">
+stack": "AuthenticationError: The email or password provided is incorrect.
+    at login (/home/app/node_modules/payload/dist/auth/operations/login.js:62:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async loginHandler (/home/app/node_modules/payload/dist/auth/requestHandlers/login.js:20:24)"
+</pre>
+            <ul id="cs2"><span class="colord">Lesson Learned</span> <i class="fas fa-arrow-right"></i> This showed me the power of using specialized tools
+               like Burp Suite. While the browser UI is limited to what’s shown on the page, Burp lets us dive deeper, adjusting details that 
+               the server notices but the browser doesn’t usually display. For security testing, this can make a huge difference in uncovering
+                hidden information.</ul> 
+            <br>
+          <br>
+            <h3 class="headerd">ii.&#41; <span>Case Study: POST Request Parameters</span></h3>
+            <ul>So, In this report we will get to know the importance of capturing each and every request specifically POST, PUT request because
+              the parameters aren't shown in URL if it does not support GET method.
+            </ul>
+            <br>
+            <ul>As I navigated through the reviews page of a web application, I noticed a button allowing users to vote or like an already 
+              posted review. Curious about the underlying mechanics, I decided to investigate further.</ul>
+              <br>
+              <ul><span class="colord">Steps To Reproduce:</span></i></ul> 
+            <br>
+            <ol class="list">
+              <li><span class="colorb">Step</span> <i class="fas fa-arrow-right"></i> I clicked on the like button and captured the request in Burp Suite. The POST request to 
+                <span class="colord"><i>/api/reviews/vote</i></span> had several parameters in the body, including <span class="colord"><i>reviewId=122825603&vote=1&apiKey=pubkey-XCodOia&sId=94323</i></span></li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/poc77.jpg" alt="">
+                <img draggable="true" class="tilt" src="../../assets/images/poc33.jpg" alt="">
+                </div>
+                <br>
+                <li><span class="colorb">Step</span> <i class="fas fa-arrow-right"></i> At first glance, everything seemed normal. But then, 
+                  I thought, “What if I could manipulate the reviewId?” So, I added a single quote <span class="colord">(')</span> to the reviewId parameter, 
+                  changing it to <span class="colord"><i>reviewId=122825603'</i></span>, and sent the request again.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/poc11.jpg" alt="">
+                <img draggable="true" class="tilt" src="../../assets/images/poc66.jpg" alt="">
+                </div>
+                <br>
+                <li><span class="colorb">Step</span> <i class="fas fa-arrow-right"></i> To my surprise, the server responded with a lots 
+                  of errors, revealing sensitive information about the database, tables, columns, stack trace which could leads to SQli. 
+                As I said earlier that in many cases information disclosure is the first step and it servers at gateway towards other vulnerabilities.</li>
+              <div class="imagedup">
+                <img draggable="true" class="tilt" src="../../assets/images/poc44.jpg" alt="">
+                <img draggable="true" class="tilt" src="../../assets/images/poc55.jpg" alt="">
+                </div>
+              <br>
+              </ol>
+              <pre class="prettyprint">
+            "message":"An error has occurred.",
+            "exceptionMessage":"The INSERT statement conflicted with the FOREIGN KEY constraint \"FK_dbo.ReviewVotes_dbo.Review_ReviewId\". 
+            The conflict occurred in database \"shopry_shopifyproductaddons\", table \"dbo.Review\", column 'Id'.\r\nThe statement has been terminated.",
+            "exceptionType":"System.Data.SqlClient.SqlException",
+            "stackTrace":" at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)"
+</pre>
+            <ul><span class="colord">Lesson Learned</span> <i class="fas fa-arrow-right"></i> This experience showed me the importance of 
+              capturing every request because not all parameters are visible in the URL. Many important details are often hidden in POST 
+              requests. So, we should always check all requests, even the ones that seem normal, to find potential security issues.</ul> 
+            <br id="tip">
+            <br>
+          <br>
+          <h3 class="headerc">3. <span>Tips and Techniques</span></h3>
+          <br>
+          <ul><span class="colorc">Art of Observation: </span> <i class="fas fa-arrow-right"></i> Always look for unusual parameters, unexpected data, or error messages that might reveal backend details.</ul>
+          <br>
+          <ul><span class="colorc">Explore Beyond the UI: </span> <i class="fas fa-arrow-right"></i> UI-based testing is just the tip of the iceberg. Tools like Burp Suite offer access to raw requests and responses, showing details that you simply can’t see in the browser.</ul>
+          <br>
+          <ul><span class="colorc">Error Handling: </span> <i class="fas fa-arrow-right"></i> Systems often disclose extra info when they’re stressed or confused. Purposely triggering errors (without causing harm) can sometimes lead to info leaks.</ul>
+          <br>
+          <ul><span class="colorc">Stay Curious: </span> <i class="fas fa-arrow-right"></i> Approach every request with curiosity. Is there something odd here? Could there be more parameters if I just look a little closer?</ul>
+          <br id="fix">
+          <br>
+          <br>
+          <h3 class="headerc">4. <span>Mitigation</span></h3>
+          <ul>If you’re on the defensive side, you’ll want to lock these doors:</ul>
+          <br>
+          <ul><span class="colorc">Limit Error Detail: </span> <i class="fas fa-arrow-right"></i> Ensure that error messages are clear to the user but don't expose backend information.</ul>
+          <br>
+          <ul><span class="colorc">Sanitize Inputs: </span> <i class="fas fa-arrow-right"></i> Never trust user input. Validate and sanitize everything, especially on the server side.</ul>
+          <br>
+          <ul><span class="colorc">Access Control: </span> <i class="fas fa-arrow-right"></i> Make sure data is only accessible to those who genuinely need it. Role-based access control (RBAC) can limit unnecessary data exposure.</ul>
+          <br>
+          <ul><span class="colorc">Regular Testing: </span> <i class="fas fa-arrow-right"></i> Periodic security assessments are essential to catch any weak points before attackers do.</ul>
+          <br id="conc">
+          <br>
+          <br>
+        <h3 class="headerc">5. <span>Conclusion</span></h3>
+        <br>
+        <ul>So, next time you’re in Burp Suite, intercept a request, tweak a parameter, and see what you uncover. The secrets are out there—you just need to know where to look.</ul>
+          <br>
+        <ul>So mates, I hope you had learnt something new after reading this article. You can share your views in my <a target="_blank" href="https://scriptjacker.in/contact/"><span class="color">Contact Page</span></a> and If you guys also want to become a author of a article so also you can email me or fill contact form and I will post your article here with your name, Only if the topic is interesting :&#41; </ul>
+            <br>
+            <br>
+          </ol>
+            <br>
+                
+          <div class="backbtn">
+            <a href="../" class="btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Blogs</span>
+          </a>
+          </div>
+
+          </div>
+        </div>
+</section>
+<!-- section end -->
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>ScriptJacker</h3>
+          <p>Thank you for visiting our website. <br/> Keep growing and stay connected!</p>
+      </div>
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="../../"><i class="fas fa-chevron-circle-right"></i> home</a>
+          <a href="../../about"><i class="fas fa-chevron-circle-right"></i> about</a>
+          <a href="../"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../contact"><i class="fas fa-chevron-circle-right"></i> contact</a>
+          <a href="../../projects"><i class="fas fa-chevron-circle-right"></i> Projects</a>
+      </div>
+
+      <div class="box">
+          <h3>contact info</h3>
+          <p> <i class="fas fa-phone"></i>+91 7497054662</p>
+          <p> <i class="fas fa-envelope"></i>scriptjacker@gmail.com</p>
+          <p> <i class="fas fa-map-marked-alt"></i>Haryana, India-125001</p>
+          <div class="share">
+
+            <a href="https://www.linkedin.com/company/scriptjacker" class="fab fa-linkedin" aria-label="LinkedIn" target="_blank"></a>
+            <a href="https://github.com/scriptjacker" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
+            <a href="mailto:scriptjacker@gmail.com" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+            <a href="https://twitter.com/scriptjacker" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            <a href="https://youtube.com/@Scriptjacker" class="fab fa-youtube" aria-label="Youtube" target="_blank"></a>
+          </div>
+      </div>
+  </div>
+
+  <h1 class="credit">&copy; 2024 ScriptJacker. All rights reserved.</h1>
+
+</section>
+<!-- footer section ends -->
+</div>
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../../assets/js/page.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+<a href="#about" aria-label="ScrollTop" class="fas fa-angle-up" id="scroll-top"></a>
+</body>
+</html>
