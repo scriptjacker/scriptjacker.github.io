@@ -639,6 +639,10 @@ form .button-area {
   color: rgb(10, 250, 30);
 }
 
+.headinga span {
+  color: rgb(201, 5, 5);
+}
+
 .header span {
   color: rgb(12, 226, 23);
 }
