@@ -1,20 +1,30 @@
-<!doctype html>
-<html>
-<body>
-<pre id=result>running...</pre>
-<script>
-const url = "https://backend-test.uitpas.be/api/search/organiser";
-const body = {"from":0,"size":500,"query":{"query_string":{"query":"pointOfSale: true","fields":["address.zipcode","address.city","name"]}},"sort":{"name.raw":"asc"}};
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>CORS PoC</title>
 
-fetch(url, {
-  method: "POST",
-  credentials: "include", // try with and without depending on endpoint auth
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(body)
+<script>
+fetch("https://backend-test.uitpas.be/api/search/organiser", {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    from: 0,
+    size: 500,
+    query: {
+      query_string: {
+        query: "pointOfSale: true",
+        fields: ["address.zipcode", "address.city", "name"]
+      }
+    },
+    sort: {"name.raw": "asc"}
+  })
 })
-.then(r => r.text().then(t => ({status: r.status, headers: [...r.headers], body: t})))
-.then(obj => document.getElementById("result").textContent = JSON.stringify(obj, null, 2))
-.catch(err => document.getElementById("result").textContent = "error: " + err);
+.then(response => response.text())
+.then(data => {
+  console.log("Response:", data);
+})
+.catch(err => {
+  console.error("Request failed:", err);
+});
 </script>
-</body>
-</html>
