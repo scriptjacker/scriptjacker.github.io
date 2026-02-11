@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUILDATHON 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #fff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .widget {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .brand {
+            font-size: 0.9rem;
+            color: #4fc3f7;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff 0%, #4fc3f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .event-info {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: rgba(79, 195, 247, 0.15);
+            border: 1px solid rgba(79, 195, 247, 0.4);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #4fc3f7;
+            font-weight: 600;
+        }
+
+        .prize {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .detail-item {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+        }
+
+        .detail-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            color: #b0bec5;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #4fc3f7;
+        }
+
+        .highlights {
+            margin: 20px 0;
+        }
+
+        .highlights-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #ff6b9d;
+        }
+
+        .highlights-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .highlight {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            padding: 8px;
+            background: rgba(79, 195, 247, 0.05);
+            border-radius: 8px;
+        }
+
+        .highlight-icon {
+            font-size: 1.1rem;
+            min-width: 20px;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(79, 195, 247, 0.2);
+            font-size: 0.8rem;
+            color: #b0bec5;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .widget {
+                padding: 15px;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .prize {
+                font-size: 1.4rem;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .highlights-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="widget">
+        <div class="header">
+            <div class="brand">BuildForStudents Presents</div>
+            <h1 class="title">BUILDATHON 2026</h1>
+            <div class="event-info">
+                <span class="info-badge">💻 Virtual Hackathon</span>
+                <span class="info-badge">🇮🇳 All India</span>
+            </div>
+        </div>
+
+        <div class="prize">💰 Prize Pool: ₹30,000+</div>
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-icon">📅</div>
+                <div class="detail-label">Date</div>
+                <div class="detail-value">06-07 March</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon">⏱️</div>
+                <div class="detail-label">Duration</div>
+                <div class="detail-value">24 Hours</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon">👥</div>
+                <div class="detail-label">Team Size</div>
+                <div class="detail-value">1-4 Members</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-icon">🎓</div>
+                <div class="detail-label">Certificates</div>
+                <div class="detail-value">All Participants</div>
+            </div>
+        </div>
+
+        <div class="highlights">
+            <div class="highlights-title">🔥 Why Join?</div>
+            <div class="highlights-list">
+                <div class="highlight">
+                    <span class="highlight-icon">🚀</span>
+                    <span>Industry-level exposure</span>
+                </div>
+                <div class="highlight">
+                    <span class="highlight-icon">👨‍🏫</span>
+                    <span>Expert mentorship</span>
+                </div>
+                <div class="highlight">
+                    <span class="highlight-icon">💡</span>
+                    <span>Build real projects</span>
+                </div>
+                <div class="highlight">
+                    <span class="highlight-icon">💼</span>
+                    <span>Internship opportunities</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="https://hackathon.techfests.site" target="_blank" class="register-btn">
+                Register Now 🚀
+            </a>
+        </div>
+
+        <div class="footer">
+            Follow us: @BuildForStudents.in
+        </div>
+    </div>
+</body>
+</html>
